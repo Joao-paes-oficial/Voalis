@@ -3,71 +3,64 @@
 <head>
     <style class="darkreader darkreader--fallback" media="screen"></style>
     <style class="darkreader darkreader--text" media="screen"></style>
-    <style class="darkreader darkreader--invert" media="screen">
-        .jfk-bubble.gtx-bubble,
-        .captcheck_answer_label>input+img,
-        span#closed_text>img[src^="https://www.gstatic.com/images/branding/googlelogo"],
-        span[data-href^="https://www.hcaptcha.com/"]>#icon,
-        #bit-notification-bar-iframe,
-        embed[type="application/pdf"] {
-            filter: null !important;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <link class="darkreader darkreader--invert" media="screen" rel="stylesheet" href="../static/css/styleAtualizado.css">
+
     <style class="darkreader darkreader--inline" media="screen">
         [data-darkreader-inline-bgcolor] {
             background-color: var(--darkreader-inline-bgcolor) !important;
         }
-
+        
         [data-darkreader-inline-bgimage] {
             background-image: var(--darkreader-inline-bgimage) !important;
         }
-
+        
         [data-darkreader-inline-border] {
             border-color: var(--darkreader-inline-border) !important;
         }
-
+        
         [data-darkreader-inline-border-bottom] {
             border-bottom-color: var(--darkreader-inline-border-bottom) !important;
         }
-
+        
         [data-darkreader-inline-border-left] {
             border-left-color: var(--darkreader-inline-border-left) !important;
         }
-
+        
         [data-darkreader-inline-border-right] {
             border-right-color: var(--darkreader-inline-border-right) !important;
         }
-
+        
         [data-darkreader-inline-border-top] {
             border-top-color: var(--darkreader-inline-border-top) !important;
         }
-
+        
         [data-darkreader-inline-boxshadow] {
             box-shadow: var(--darkreader-inline-boxshadow) !important;
         }
-
+        
         [data-darkreader-inline-color] {
             color: var(--darkreader-inline-color) !important;
         }
-
+        
         [data-darkreader-inline-fill] {
             fill: var(--darkreader-inline-fill) !important;
         }
-
+        
         [data-darkreader-inline-stroke] {
             stroke: var(--darkreader-inline-stroke) !important;
         }
-
+        
         [data-darkreader-inline-outline] {
             outline-color: var(--darkreader-inline-outline) !important;
         }
-
+        
         [data-darkreader-inline-stopcolor] {
             stop-color: var(--darkreader-inline-stopcolor) !important;
         }
     </style>
     <style class="darkreader darkreader--variables" media="screen">
-        :root {
+         :root {
             --darkreader-neutral-background: #c2beb9;
             --darkreader-neutral-text: #2a2e2f;
             --darkreader-selection-background: #3e6595;
@@ -75,7 +68,8 @@
         }
     </style>
     <style class="darkreader darkreader--root-vars" media="screen"></style>
-    <script class="darkreader darkreader--proxy">(function injectProxy() {
+    <script class="darkreader darkreader--proxy">
+        (function injectProxy() {
             document.dispatchEvent(
                 new CustomEvent("__darkreader__inlineScriptsAllowed")
             );
@@ -98,9 +92,9 @@
             const shouldWrapDocStyleSheets =
                 location.hostname.endsWith("pushbullet.com") ||
                 location.hostname.endsWith("ilsole24ore.com");
-            const documentStyleSheetsDescriptor = shouldWrapDocStyleSheets
-                ? Object.getOwnPropertyDescriptor(Document.prototype, "styleSheets")
-                : null;
+            const documentStyleSheetsDescriptor = shouldWrapDocStyleSheets ?
+                Object.getOwnPropertyDescriptor(Document.prototype, "styleSheets") :
+                null;
             const cleanUp = () => {
                 Object.defineProperty(
                     CSSStyleSheet.prototype,
@@ -139,7 +133,9 @@
                 customElements.whenDefined(e.detail.tag).then(() => {
                     document.dispatchEvent(
                         new CustomEvent("__darkreader__isDefined", {
-                            detail: { tag: e.detail.tag }
+                            detail: {
+                                tag: e.detail.tag
+                            }
                         })
                     );
                 });
@@ -150,6 +146,7 @@
                 addUndefinedResolver
             );
             const updateSheetEvent = new Event("__darkreader__updateSheet");
+
             function proxyAddRule(selector, style, index) {
                 addRuleDescriptor.value.call(this, selector, style, index);
                 if (
@@ -160,6 +157,7 @@
                 }
                 return -1;
             }
+
             function proxyInsertRule(rule, index) {
                 const returnValue = insertRuleDescriptor.value.call(
                     this,
@@ -174,6 +172,7 @@
                 }
                 return returnValue;
             }
+
             function proxyDeleteRule(index) {
                 deleteRuleDescriptor.value.call(this, index);
                 if (
@@ -183,6 +182,7 @@
                     this.ownerNode.dispatchEvent(updateSheetEvent);
                 }
             }
+
             function proxyRemoveRule(index) {
                 removeRuleDescriptor.value.call(this, index);
                 if (
@@ -192,6 +192,7 @@
                     this.ownerNode.dispatchEvent(updateSheetEvent);
                 }
             }
+
             function proxyDocumentStyleSheets() {
                 const docSheets = documentStyleSheetsDescriptor.get.call(this);
                 const filtered = [...docSheets].filter((styleSheet) => {
@@ -202,22 +203,30 @@
             Object.defineProperty(
                 CSSStyleSheet.prototype,
                 "addRule",
-                Object.assign({}, addRuleDescriptor, { value: proxyAddRule })
+                Object.assign({}, addRuleDescriptor, {
+                    value: proxyAddRule
+                })
             );
             Object.defineProperty(
                 CSSStyleSheet.prototype,
                 "insertRule",
-                Object.assign({}, insertRuleDescriptor, { value: proxyInsertRule })
+                Object.assign({}, insertRuleDescriptor, {
+                    value: proxyInsertRule
+                })
             );
             Object.defineProperty(
                 CSSStyleSheet.prototype,
                 "deleteRule",
-                Object.assign({}, deleteRuleDescriptor, { value: proxyDeleteRule })
+                Object.assign({}, deleteRuleDescriptor, {
+                    value: proxyDeleteRule
+                })
             );
             Object.defineProperty(
                 CSSStyleSheet.prototype,
                 "removeRule",
-                Object.assign({}, removeRuleDescriptor, { value: proxyRemoveRule })
+                Object.assign({}, removeRuleDescriptor, {
+                    value: proxyRemoveRule
+                })
             );
             if (shouldWrapDocStyleSheets) {
                 Object.defineProperty(
@@ -228,12 +237,13 @@
                     })
                 );
             }
-        })()</script>
+        })()
+    </script>
     <style class="darkreader darkreader--user-agent" media="screen">
         html {
             background-color: #dcdad7 !important;
         }
-
+        
         html,
         body,
         input,
@@ -242,7 +252,7 @@
         button {
             background-color: #dcdad7;
         }
-
+        
         html,
         body,
         input,
@@ -252,64 +262,62 @@
             border-color: #4e5458;
             color: #181a1b;
         }
-
+        
         a {
             color: #3d5bb6;
         }
-
+        
         table {
             border-color: #827c72;
         }
-
-        ::placeholder {
+        
+         ::placeholder {
             color: #a09a92;
         }
-
+        
         input:-webkit-autofill,
         textarea:-webkit-autofill,
         select:-webkit-autofill {
             background-color: #eff78a !important;
             color: #181a1b !important;
         }
-
-        ::-webkit-scrollbar {
+        
+         ::-webkit-scrollbar {
             background-color: #d2d0cc;
             color: #5c6468;
         }
-
-        ::-webkit-scrollbar-thumb {
+        
+         ::-webkit-scrollbar-thumb {
             background-color: #a49f98;
         }
-
-        ::-webkit-scrollbar-thumb:hover {
+        
+         ::-webkit-scrollbar-thumb:hover {
             background-color: #8e887e;
         }
-
-        ::-webkit-scrollbar-thumb:active {
+        
+         ::-webkit-scrollbar-thumb:active {
             background-color: #5c6468;
         }
-
-        ::-webkit-scrollbar-corner {
+        
+         ::-webkit-scrollbar-corner {
             background-color: #dcdad7;
         }
-
-        ::selection {
+        
+         ::selection {
             background-color: #3e6595 !important;
             color: #dcdad7 !important;
         }
-
-        ::-moz-selection {
+        
+         ::-moz-selection {
             background-color: #3e6595 !important;
             color: #dcdad7 !important;
         }
     </style>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description"
-        content="Seu cartão de visita agora é digital. Introduzindo o cartão de visita digital da Voalis: Voalis Cards">
+    <meta name="description" content="Seu cartão de visita agora é digital. Introduzindo o cartão de visita digital da Voalis: Voalis Cards">
     <meta property="og:site_name" content="Voalis">
     <meta property="og:title" content="Voalis">
-    <meta property="og:description"
-        content="Seu cartão de visita agora é digital. Introduzindo o cartão de visita digital da Voalis: Voalis Cards">
+    <meta property="og:description" content="Seu cartão de visita agora é digital. Introduzindo o cartão de visita digital da Voalis: Voalis Cards">
     <meta property="og:url" content="Voalis">
 
     <link rel="manifest" href="https://voalis.com/manifest.json">
@@ -317,18 +325,32 @@
 
     <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148419930-1"></script>
     <script>
-            (function (a, s, y, n, c, h, i, d, e) {
-                s.className += ' ' + y; h.start = 1 * new Date;
-                h.end = i = function () { s.className = s.className.replace(RegExp(' ?' + y), '') };
-                (a[n] = a[n] || []).hide = h; setTimeout(function () { i(); h.end = null }, c); h.timeout = c;
-            })(window, document.documentElement, 'async-hide', 'dataLayer', 1500,
-                { 'GTM-N9P432P': true });
+        (function(a, s, y, n, c, h, i, d, e) {
+            s.className += ' ' + y;
+            h.start = 1 * new Date;
+            h.end = i = function() {
+                s.className = s.className.replace(RegExp(' ?' + y), '')
+            };
+            (a[n] = a[n] || []).hide = h;
+            setTimeout(function() {
+                i();
+                h.end = null
+            }, c);
+            h.timeout = c;
+        })(window, document.documentElement, 'async-hide', 'dataLayer', 1500, {
+            'GTM-N9P432P': true
+        });
 
         window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
         gtag('js', new Date());
 
-        gtag('config', 'UA-148419930-1', { 'optimize_id': 'GTM-N9P432P' });
+        gtag('config', 'UA-148419930-1', {
+            'optimize_id': 'GTM-N9P432P'
+        });
     </script>
     <script>
         function implementExperimentA(value) {
@@ -343,7 +365,10 @@
             }
         }
 
-        gtag('event', 'optimize.callback', { name: 'UiCOKwDJScupb-Y2U9S4ew', callback: implementExperimentA });
+        gtag('event', 'optimize.callback', {
+            name: 'UiCOKwDJScupb-Y2U9S4ew',
+            callback: implementExperimentA
+        });
     </script>
     <style>
         .async-hide {
@@ -360,15 +385,15 @@
             border-color: #c59d00 !important;
             color: #302505 !important;
         }
-
-        ::placeholder {
+        
+         ::placeholder {
             opacity: 0.5 !important;
         }
-
+        
         a[href="https://coinmarketcap.com/"]>svg[width="94"][height="16"]>path {
             fill: var(--darkreader-neutral-text) !important;
         }
-
+        
         #edge-translate-panel-body {
             color: var(--darkreader-neutral-text) !important;
         }
@@ -385,29 +410,27 @@
                 -webkit-transform: rotate(0deg);
                 transform: rotate(0deg)
             }
-
             to {
                 -webkit-transform: rotate(360deg);
                 transform: rotate(360deg)
             }
         }
-
+        
         @keyframes jconfirm-spin {
             from {
                 -webkit-transform: rotate(0deg);
                 transform: rotate(0deg)
             }
-
             to {
                 -webkit-transform: rotate(360deg);
                 transform: rotate(360deg)
             }
         }
-
+        
         body[class*=jconfirm-no-scroll-] {
             overflow: hidden !important
         }
-
+        
         .jconfirm {
             position: fixed;
             top: 0;
@@ -418,7 +441,7 @@
             font-family: inherit;
             overflow: hidden
         }
-
+        
         .jconfirm .jconfirm-bg {
             position: fixed;
             top: 0;
@@ -428,11 +451,11 @@
             -webkit-transition: opacity .4s;
             transition: opacity .4s
         }
-
+        
         .jconfirm .jconfirm-bg.jconfirm-bg-h {
             opacity: 0 !important
         }
-
+        
         .jconfirm .jconfirm-scrollpane {
             -webkit-perspective: 500px;
             perspective: 500px;
@@ -442,34 +465,34 @@
             width: 100%;
             height: 100%
         }
-
+        
         .jconfirm .jconfirm-row {
             display: table-row;
             width: 100%
         }
-
+        
         .jconfirm .jconfirm-cell {
             display: table-cell;
             vertical-align: middle
         }
-
+        
         .jconfirm .jconfirm-holder {
             max-height: 100%;
             padding: 50px 0
         }
-
+        
         .jconfirm .jconfirm-box-container {
             -webkit-transition: -webkit-transform;
             transition: -webkit-transform;
             transition: transform;
             transition: transform, -webkit-transform
         }
-
+        
         .jconfirm .jconfirm-box-container.jconfirm-no-transition {
             -webkit-transition: none !important;
             transition: none !important
         }
-
+        
         .jconfirm .jconfirm-box {
             background: white;
             border-radius: 4px;
@@ -480,198 +503,174 @@
             margin-left: auto;
             margin-right: auto
         }
-
+        
         @-webkit-keyframes type-blue {
-
             1%,
             100% {
                 border-color: #3498db
             }
-
             50% {
                 border-color: #5faee3
             }
         }
-
+        
         @keyframes type-blue {
-
             1%,
             100% {
                 border-color: #3498db
             }
-
             50% {
                 border-color: #5faee3
             }
         }
-
+        
         @-webkit-keyframes type-green {
-
             1%,
             100% {
                 border-color: #2ecc71
             }
-
             50% {
                 border-color: #54d98c
             }
         }
-
+        
         @keyframes type-green {
-
             1%,
             100% {
                 border-color: #2ecc71
             }
-
             50% {
                 border-color: #54d98c
             }
         }
-
+        
         @-webkit-keyframes type-red {
-
             1%,
             100% {
                 border-color: #e74c3c
             }
-
             50% {
                 border-color: #ed7669
             }
         }
-
+        
         @keyframes type-red {
-
             1%,
             100% {
                 border-color: #e74c3c
             }
-
             50% {
                 border-color: #ed7669
             }
         }
-
+        
         @-webkit-keyframes type-orange {
-
             1%,
             100% {
                 border-color: #f1c40f
             }
-
             50% {
                 border-color: #f4d03f
             }
         }
-
+        
         @keyframes type-orange {
-
             1%,
             100% {
                 border-color: #f1c40f
             }
-
             50% {
                 border-color: #f4d03f
             }
         }
-
+        
         @-webkit-keyframes type-purple {
-
             1%,
             100% {
                 border-color: #9b59b6
             }
-
             50% {
                 border-color: #b07cc6
             }
         }
-
+        
         @keyframes type-purple {
-
             1%,
             100% {
                 border-color: #9b59b6
             }
-
             50% {
                 border-color: #b07cc6
             }
         }
-
+        
         @-webkit-keyframes type-dark {
-
             1%,
             100% {
                 border-color: #34495e
             }
-
             50% {
                 border-color: #46627f
             }
         }
-
+        
         @keyframes type-dark {
-
             1%,
             100% {
                 border-color: #34495e
             }
-
             50% {
                 border-color: #46627f
             }
         }
-
+        
         .jconfirm .jconfirm-box.jconfirm-type-animated {
             -webkit-animation-duration: 2s;
             animation-duration: 2s;
             -webkit-animation-iteration-count: infinite;
             animation-iteration-count: infinite
         }
-
+        
         .jconfirm .jconfirm-box.jconfirm-type-blue {
             border-top: solid 7px #3498db;
             -webkit-animation-name: type-blue;
             animation-name: type-blue
         }
-
+        
         .jconfirm .jconfirm-box.jconfirm-type-green {
             border-top: solid 7px #2ecc71;
             -webkit-animation-name: type-green;
             animation-name: type-green
         }
-
+        
         .jconfirm .jconfirm-box.jconfirm-type-red {
             border-top: solid 7px #e74c3c;
             -webkit-animation-name: type-red;
             animation-name: type-red
         }
-
+        
         .jconfirm .jconfirm-box.jconfirm-type-orange {
             border-top: solid 7px #f1c40f;
             -webkit-animation-name: type-orange;
             animation-name: type-orange
         }
-
+        
         .jconfirm .jconfirm-box.jconfirm-type-purple {
             border-top: solid 7px #9b59b6;
             -webkit-animation-name: type-purple;
             animation-name: type-purple
         }
-
+        
         .jconfirm .jconfirm-box.jconfirm-type-dark {
             border-top: solid 7px #34495e;
             -webkit-animation-name: type-dark;
             animation-name: type-dark
         }
-
+        
         .jconfirm .jconfirm-box.loading {
             height: 120px
         }
-
+        
         .jconfirm .jconfirm-box.loading:before {
             content: '';
             position: absolute;
@@ -683,7 +682,7 @@
             border-radius: 10px;
             z-index: 1
         }
-
+        
         .jconfirm .jconfirm-box.loading:after {
             opacity: .6;
             content: '';
@@ -701,7 +700,7 @@
             margin-top: -15px;
             z-index: 2
         }
-
+        
         .jconfirm .jconfirm-box div.jconfirm-closeIcon {
             height: 20px;
             width: 20px;
@@ -716,27 +715,27 @@
             display: none;
             z-index: 1
         }
-
+        
         .jconfirm .jconfirm-box div.jconfirm-closeIcon:empty {
             display: none
         }
-
+        
         .jconfirm .jconfirm-box div.jconfirm-closeIcon .fa {
             font-size: 16px
         }
-
+        
         .jconfirm .jconfirm-box div.jconfirm-closeIcon .glyphicon {
             font-size: 16px
         }
-
+        
         .jconfirm .jconfirm-box div.jconfirm-closeIcon .zmdi {
             font-size: 16px
         }
-
+        
         .jconfirm .jconfirm-box div.jconfirm-closeIcon:hover {
             opacity: 1
         }
-
+        
         .jconfirm .jconfirm-box div.jconfirm-title-c {
             display: block;
             font-size: 22px;
@@ -748,25 +747,25 @@
             cursor: default;
             padding-bottom: 15px
         }
-
+        
         .jconfirm .jconfirm-box div.jconfirm-title-c.jconfirm-hand {
             cursor: move
         }
-
+        
         .jconfirm .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
             font-size: inherit;
             display: inline-block;
             vertical-align: middle
         }
-
+        
         .jconfirm .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c i {
             vertical-align: middle
         }
-
+        
         .jconfirm .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c:empty {
             display: none
         }
-
+        
         .jconfirm .jconfirm-box div.jconfirm-title-c .jconfirm-title {
             -webkit-user-select: none;
             -moz-user-select: none;
@@ -777,11 +776,11 @@
             display: inline-block;
             vertical-align: middle
         }
-
+        
         .jconfirm .jconfirm-box div.jconfirm-title-c .jconfirm-title:empty {
             display: none
         }
-
+        
         .jconfirm .jconfirm-box div.jconfirm-content-pane {
             margin-bottom: 15px;
             height: auto;
@@ -793,47 +792,47 @@
             overflow-x: hidden;
             overflow-y: auto
         }
-
+        
         .jconfirm .jconfirm-box div.jconfirm-content-pane.no-scroll {
             overflow-y: hidden
         }
-
+        
         .jconfirm .jconfirm-box div.jconfirm-content-pane::-webkit-scrollbar {
             width: 3px
         }
-
+        
         .jconfirm .jconfirm-box div.jconfirm-content-pane::-webkit-scrollbar-track {
             background: rgba(0, 0, 0, 0.1)
         }
-
+        
         .jconfirm .jconfirm-box div.jconfirm-content-pane::-webkit-scrollbar-thumb {
             background: #666;
             border-radius: 3px
         }
-
+        
         .jconfirm .jconfirm-box div.jconfirm-content-pane .jconfirm-content {
             overflow: auto
         }
-
+        
         .jconfirm .jconfirm-box div.jconfirm-content-pane .jconfirm-content img {
             max-width: 100%;
             height: auto
         }
-
+        
         .jconfirm .jconfirm-box div.jconfirm-content-pane .jconfirm-content:empty {
             display: none
         }
-
+        
         .jconfirm .jconfirm-box .jconfirm-buttons {
             padding-bottom: 11px
         }
-
+        
         .jconfirm .jconfirm-box .jconfirm-buttons>button {
             margin-bottom: 4px;
             margin-left: 2px;
             margin-right: 2px
         }
-
+        
         .jconfirm .jconfirm-box .jconfirm-buttons button {
             display: inline-block;
             padding: 6px 12px;
@@ -860,7 +859,7 @@
             border: 0;
             background-image: none
         }
-
+        
         .jconfirm .jconfirm-box .jconfirm-buttons button.btn-blue {
             background-color: #3498db;
             color: #FFF;
@@ -868,12 +867,12 @@
             -webkit-transition: background .2s;
             transition: background .2s
         }
-
+        
         .jconfirm .jconfirm-box .jconfirm-buttons button.btn-blue:hover {
             background-color: #2980b9;
             color: #FFF
         }
-
+        
         .jconfirm .jconfirm-box .jconfirm-buttons button.btn-green {
             background-color: #2ecc71;
             color: #FFF;
@@ -881,12 +880,12 @@
             -webkit-transition: background .2s;
             transition: background .2s
         }
-
+        
         .jconfirm .jconfirm-box .jconfirm-buttons button.btn-green:hover {
             background-color: #27ae60;
             color: #FFF
         }
-
+        
         .jconfirm .jconfirm-box .jconfirm-buttons button.btn-red {
             background-color: #e74c3c;
             color: #FFF;
@@ -894,12 +893,12 @@
             -webkit-transition: background .2s;
             transition: background .2s
         }
-
+        
         .jconfirm .jconfirm-box .jconfirm-buttons button.btn-red:hover {
             background-color: #c0392b;
             color: #FFF
         }
-
+        
         .jconfirm .jconfirm-box .jconfirm-buttons button.btn-orange {
             background-color: #f1c40f;
             color: #FFF;
@@ -907,12 +906,12 @@
             -webkit-transition: background .2s;
             transition: background .2s
         }
-
+        
         .jconfirm .jconfirm-box .jconfirm-buttons button.btn-orange:hover {
             background-color: #f39c12;
             color: #FFF
         }
-
+        
         .jconfirm .jconfirm-box .jconfirm-buttons button.btn-default {
             background-color: #ecf0f1;
             color: #000;
@@ -920,12 +919,12 @@
             -webkit-transition: background .2s;
             transition: background .2s
         }
-
+        
         .jconfirm .jconfirm-box .jconfirm-buttons button.btn-default:hover {
             background-color: #bdc3c7;
             color: #000
         }
-
+        
         .jconfirm .jconfirm-box .jconfirm-buttons button.btn-purple {
             background-color: #9b59b6;
             color: #FFF;
@@ -933,12 +932,12 @@
             -webkit-transition: background .2s;
             transition: background .2s
         }
-
+        
         .jconfirm .jconfirm-box .jconfirm-buttons button.btn-purple:hover {
             background-color: #8e44ad;
             color: #FFF
         }
-
+        
         .jconfirm .jconfirm-box .jconfirm-buttons button.btn-dark {
             background-color: #34495e;
             color: #FFF;
@@ -946,73 +945,73 @@
             -webkit-transition: background .2s;
             transition: background .2s
         }
-
+        
         .jconfirm .jconfirm-box .jconfirm-buttons button.btn-dark:hover {
             background-color: #2c3e50;
             color: #FFF
         }
-
+        
         .jconfirm .jconfirm-box.jconfirm-type-red .jconfirm-title-c .jconfirm-icon-c {
             color: #e74c3c !important
         }
-
+        
         .jconfirm .jconfirm-box.jconfirm-type-blue .jconfirm-title-c .jconfirm-icon-c {
             color: #3498db !important
         }
-
+        
         .jconfirm .jconfirm-box.jconfirm-type-green .jconfirm-title-c .jconfirm-icon-c {
             color: #2ecc71 !important
         }
-
+        
         .jconfirm .jconfirm-box.jconfirm-type-purple .jconfirm-title-c .jconfirm-icon-c {
             color: #9b59b6 !important
         }
-
+        
         .jconfirm .jconfirm-box.jconfirm-type-orange .jconfirm-title-c .jconfirm-icon-c {
             color: #f1c40f !important
         }
-
+        
         .jconfirm .jconfirm-box.jconfirm-type-dark .jconfirm-title-c .jconfirm-icon-c {
             color: #34495e !important
         }
-
+        
         .jconfirm .jconfirm-clear {
             clear: both
         }
-
+        
         .jconfirm.jconfirm-rtl {
             direction: rtl
         }
-
+        
         .jconfirm.jconfirm-rtl div.jconfirm-closeIcon {
             left: 5px;
             right: auto
         }
-
+        
         .jconfirm.jconfirm-white .jconfirm-bg,
         .jconfirm.jconfirm-light .jconfirm-bg {
             background-color: #444;
             opacity: .2
         }
-
+        
         .jconfirm.jconfirm-white .jconfirm-box,
         .jconfirm.jconfirm-light .jconfirm-box {
             -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
             border-radius: 5px
         }
-
+        
         .jconfirm.jconfirm-white .jconfirm-box .jconfirm-title-c .jconfirm-icon-c,
         .jconfirm.jconfirm-light .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
             margin-right: 8px;
             margin-left: 0
         }
-
+        
         .jconfirm.jconfirm-white .jconfirm-box .jconfirm-buttons,
         .jconfirm.jconfirm-light .jconfirm-box .jconfirm-buttons {
             float: right
         }
-
+        
         .jconfirm.jconfirm-white .jconfirm-box .jconfirm-buttons button,
         .jconfirm.jconfirm-light .jconfirm-box .jconfirm-buttons button {
             text-transform: uppercase;
@@ -1020,31 +1019,31 @@
             font-weight: bold;
             text-shadow: none
         }
-
+        
         .jconfirm.jconfirm-white .jconfirm-box .jconfirm-buttons button.btn-default,
         .jconfirm.jconfirm-light .jconfirm-box .jconfirm-buttons button.btn-default {
             -webkit-box-shadow: none;
             box-shadow: none;
             color: #333
         }
-
+        
         .jconfirm.jconfirm-white .jconfirm-box .jconfirm-buttons button.btn-default:hover,
         .jconfirm.jconfirm-light .jconfirm-box .jconfirm-buttons button.btn-default:hover {
             background: #ddd
         }
-
+        
         .jconfirm.jconfirm-white.jconfirm-rtl .jconfirm-title-c .jconfirm-icon-c,
         .jconfirm.jconfirm-light.jconfirm-rtl .jconfirm-title-c .jconfirm-icon-c {
             margin-left: 8px;
             margin-right: 0
         }
-
+        
         .jconfirm.jconfirm-black .jconfirm-bg,
         .jconfirm.jconfirm-dark .jconfirm-bg {
             background-color: darkslategray;
             opacity: .4
         }
-
+        
         .jconfirm.jconfirm-black .jconfirm-box,
         .jconfirm.jconfirm-dark .jconfirm-box {
             -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
@@ -1053,18 +1052,18 @@
             border-radius: 5px;
             color: white
         }
-
+        
         .jconfirm.jconfirm-black .jconfirm-box .jconfirm-title-c .jconfirm-icon-c,
         .jconfirm.jconfirm-dark .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
             margin-right: 8px;
             margin-left: 0
         }
-
+        
         .jconfirm.jconfirm-black .jconfirm-box .jconfirm-buttons,
         .jconfirm.jconfirm-dark .jconfirm-box .jconfirm-buttons {
             float: right
         }
-
+        
         .jconfirm.jconfirm-black .jconfirm-box .jconfirm-buttons button,
         .jconfirm.jconfirm-dark .jconfirm-box .jconfirm-buttons button {
             border: 0;
@@ -1077,7 +1076,7 @@
             transition: background .1s;
             color: white
         }
-
+        
         .jconfirm.jconfirm-black .jconfirm-box .jconfirm-buttons button.btn-default,
         .jconfirm.jconfirm-dark .jconfirm-box .jconfirm-buttons button.btn-default {
             -webkit-box-shadow: none;
@@ -1085,127 +1084,115 @@
             color: #fff;
             background: 0
         }
-
+        
         .jconfirm.jconfirm-black .jconfirm-box .jconfirm-buttons button.btn-default:hover,
         .jconfirm.jconfirm-dark .jconfirm-box .jconfirm-buttons button.btn-default:hover {
             background: #666
         }
-
+        
         .jconfirm.jconfirm-black.jconfirm-rtl .jconfirm-title-c .jconfirm-icon-c,
         .jconfirm.jconfirm-dark.jconfirm-rtl .jconfirm-title-c .jconfirm-icon-c {
             margin-left: 8px;
             margin-right: 0
         }
-
+        
         .jconfirm .jconfirm-box.hilight.jconfirm-hilight-shake {
             -webkit-animation: shake .82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
             animation: shake .82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
             -webkit-transform: translate3d(0, 0, 0);
             transform: translate3d(0, 0, 0)
         }
-
+        
         .jconfirm .jconfirm-box.hilight.jconfirm-hilight-glow {
             -webkit-animation: glow .82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
             animation: glow .82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
             -webkit-transform: translate3d(0, 0, 0);
             transform: translate3d(0, 0, 0)
         }
-
+        
         @-webkit-keyframes shake {
-
             10%,
             90% {
                 -webkit-transform: translate3d(-2px, 0, 0);
                 transform: translate3d(-2px, 0, 0)
             }
-
             20%,
             80% {
                 -webkit-transform: translate3d(4px, 0, 0);
                 transform: translate3d(4px, 0, 0)
             }
-
             30%,
             50%,
             70% {
                 -webkit-transform: translate3d(-8px, 0, 0);
                 transform: translate3d(-8px, 0, 0)
             }
-
             40%,
             60% {
                 -webkit-transform: translate3d(8px, 0, 0);
                 transform: translate3d(8px, 0, 0)
             }
         }
-
+        
         @keyframes shake {
-
             10%,
             90% {
                 -webkit-transform: translate3d(-2px, 0, 0);
                 transform: translate3d(-2px, 0, 0)
             }
-
             20%,
             80% {
                 -webkit-transform: translate3d(4px, 0, 0);
                 transform: translate3d(4px, 0, 0)
             }
-
             30%,
             50%,
             70% {
                 -webkit-transform: translate3d(-8px, 0, 0);
                 transform: translate3d(-8px, 0, 0)
             }
-
             40%,
             60% {
                 -webkit-transform: translate3d(8px, 0, 0);
                 transform: translate3d(8px, 0, 0)
             }
         }
-
+        
         @-webkit-keyframes glow {
-
             0%,
             100% {
                 -webkit-box-shadow: 0 0 0 red;
                 box-shadow: 0 0 0 red
             }
-
             50% {
                 -webkit-box-shadow: 0 0 30px red;
                 box-shadow: 0 0 30px red
             }
         }
-
+        
         @keyframes glow {
-
             0%,
             100% {
                 -webkit-box-shadow: 0 0 0 red;
                 box-shadow: 0 0 0 red
             }
-
             50% {
                 -webkit-box-shadow: 0 0 30px red;
                 box-shadow: 0 0 30px red
             }
         }
-
+        
         .jconfirm {
             -webkit-perspective: 400px;
             perspective: 400px
         }
-
+        
         .jconfirm .jconfirm-box {
             opacity: 1;
             -webkit-transition-property: all;
             transition-property: all
         }
-
+        
         .jconfirm .jconfirm-box.jconfirm-animation-top,
         .jconfirm .jconfirm-box.jconfirm-animation-left,
         .jconfirm .jconfirm-box.jconfirm-animation-right,
@@ -1221,153 +1208,153 @@
         .jconfirm .jconfirm-box.jconfirm-animation-scalex {
             opacity: 0
         }
-
+        
         .jconfirm .jconfirm-box.jconfirm-animation-rotate {
             -webkit-transform: rotate(90deg);
             transform: rotate(90deg)
         }
-
+        
         .jconfirm .jconfirm-box.jconfirm-animation-rotatex {
             -webkit-transform: rotateX(90deg);
             transform: rotateX(90deg);
             -webkit-transform-origin: center;
             transform-origin: center
         }
-
+        
         .jconfirm .jconfirm-box.jconfirm-animation-rotatexr {
             -webkit-transform: rotateX(-90deg);
             transform: rotateX(-90deg);
             -webkit-transform-origin: center;
             transform-origin: center
         }
-
+        
         .jconfirm .jconfirm-box.jconfirm-animation-rotatey {
             -webkit-transform: rotatey(90deg);
             transform: rotatey(90deg);
             -webkit-transform-origin: center;
             transform-origin: center
         }
-
+        
         .jconfirm .jconfirm-box.jconfirm-animation-rotateyr {
             -webkit-transform: rotatey(-90deg);
             transform: rotatey(-90deg);
             -webkit-transform-origin: center;
             transform-origin: center
         }
-
+        
         .jconfirm .jconfirm-box.jconfirm-animation-scaley {
             -webkit-transform: scaley(1.5);
             transform: scaley(1.5);
             -webkit-transform-origin: center;
             transform-origin: center
         }
-
+        
         .jconfirm .jconfirm-box.jconfirm-animation-scalex {
             -webkit-transform: scalex(1.5);
             transform: scalex(1.5);
             -webkit-transform-origin: center;
             transform-origin: center
         }
-
+        
         .jconfirm .jconfirm-box.jconfirm-animation-top {
             -webkit-transform: translate(0px, -100px);
             transform: translate(0px, -100px)
         }
-
+        
         .jconfirm .jconfirm-box.jconfirm-animation-left {
             -webkit-transform: translate(-100px, 0px);
             transform: translate(-100px, 0px)
         }
-
+        
         .jconfirm .jconfirm-box.jconfirm-animation-right {
             -webkit-transform: translate(100px, 0px);
             transform: translate(100px, 0px)
         }
-
+        
         .jconfirm .jconfirm-box.jconfirm-animation-bottom {
             -webkit-transform: translate(0px, 100px);
             transform: translate(0px, 100px)
         }
-
+        
         .jconfirm .jconfirm-box.jconfirm-animation-zoom {
             -webkit-transform: scale(1.2);
             transform: scale(1.2)
         }
-
+        
         .jconfirm .jconfirm-box.jconfirm-animation-scale {
             -webkit-transform: scale(0.5);
             transform: scale(0.5)
         }
-
+        
         .jconfirm .jconfirm-box.jconfirm-animation-none {
             visibility: hidden
         }
-
+        
         .jconfirm.jconfirm-supervan .jconfirm-bg {
             background-color: rgba(54, 70, 93, 0.95)
         }
-
+        
         .jconfirm.jconfirm-supervan .jconfirm-box {
             background-color: transparent
         }
-
+        
         .jconfirm.jconfirm-supervan .jconfirm-box.jconfirm-type-blue {
             border: 0
         }
-
+        
         .jconfirm.jconfirm-supervan .jconfirm-box.jconfirm-type-green {
             border: 0
         }
-
+        
         .jconfirm.jconfirm-supervan .jconfirm-box.jconfirm-type-red {
             border: 0
         }
-
+        
         .jconfirm.jconfirm-supervan .jconfirm-box.jconfirm-type-orange {
             border: 0
         }
-
+        
         .jconfirm.jconfirm-supervan .jconfirm-box.jconfirm-type-purple {
             border: 0
         }
-
+        
         .jconfirm.jconfirm-supervan .jconfirm-box.jconfirm-type-dark {
             border: 0
         }
-
+        
         .jconfirm.jconfirm-supervan .jconfirm-box div.jconfirm-closeIcon {
             color: white
         }
-
+        
         .jconfirm.jconfirm-supervan .jconfirm-box div.jconfirm-title-c {
             text-align: center;
             color: white;
             font-size: 28px;
             font-weight: normal
         }
-
+        
         .jconfirm.jconfirm-supervan .jconfirm-box div.jconfirm-title-c>* {
             padding-bottom: 25px
         }
-
+        
         .jconfirm.jconfirm-supervan .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
             margin-right: 8px;
             margin-left: 0
         }
-
+        
         .jconfirm.jconfirm-supervan .jconfirm-box div.jconfirm-content-pane {
             margin-bottom: 25px
         }
-
+        
         .jconfirm.jconfirm-supervan .jconfirm-box div.jconfirm-content {
             text-align: center;
             color: white
         }
-
+        
         .jconfirm.jconfirm-supervan .jconfirm-box .jconfirm-buttons {
             text-align: center
         }
-
+        
         .jconfirm.jconfirm-supervan .jconfirm-box .jconfirm-buttons button {
             font-size: 16px;
             border-radius: 2px;
@@ -1378,60 +1365,60 @@
             padding: 10px;
             min-width: 100px
         }
-
+        
         .jconfirm.jconfirm-supervan.jconfirm-rtl .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
             margin-left: 8px;
             margin-right: 0
         }
-
+        
         .jconfirm.jconfirm-material .jconfirm-bg {
             background-color: rgba(0, 0, 0, 0.67)
         }
-
+        
         .jconfirm.jconfirm-material .jconfirm-box {
             background-color: white;
             -webkit-box-shadow: 0 7px 8px -4px rgba(0, 0, 0, 0.2), 0 13px 19px 2px rgba(0, 0, 0, 0.14), 0 5px 24px 4px rgba(0, 0, 0, 0.12);
             box-shadow: 0 7px 8px -4px rgba(0, 0, 0, 0.2), 0 13px 19px 2px rgba(0, 0, 0, 0.14), 0 5px 24px 4px rgba(0, 0, 0, 0.12);
             padding: 30px 25px 10px 25px
         }
-
+        
         .jconfirm.jconfirm-material .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
             margin-right: 8px;
             margin-left: 0
         }
-
+        
         .jconfirm.jconfirm-material .jconfirm-box div.jconfirm-closeIcon {
             color: rgba(0, 0, 0, 0.87)
         }
-
+        
         .jconfirm.jconfirm-material .jconfirm-box div.jconfirm-title-c {
             color: rgba(0, 0, 0, 0.87);
             font-size: 22px;
             font-weight: bold
         }
-
+        
         .jconfirm.jconfirm-material .jconfirm-box div.jconfirm-content {
             color: rgba(0, 0, 0, 0.87)
         }
-
+        
         .jconfirm.jconfirm-material .jconfirm-box .jconfirm-buttons {
             text-align: right
         }
-
+        
         .jconfirm.jconfirm-material .jconfirm-box .jconfirm-buttons button {
             text-transform: uppercase;
             font-weight: 500
         }
-
+        
         .jconfirm.jconfirm-material.jconfirm-rtl .jconfirm-title-c .jconfirm-icon-c {
             margin-left: 8px;
             margin-right: 0
         }
-
+        
         .jconfirm.jconfirm-bootstrap .jconfirm-bg {
             background-color: rgba(0, 0, 0, 0.21)
         }
-
+        
         .jconfirm.jconfirm-bootstrap .jconfirm-box {
             background-color: white;
             -webkit-box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.2);
@@ -1439,16 +1426,16 @@
             border: solid 1px rgba(0, 0, 0, 0.4);
             padding: 15px 0 0
         }
-
+        
         .jconfirm.jconfirm-bootstrap .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
             margin-right: 8px;
             margin-left: 0
         }
-
+        
         .jconfirm.jconfirm-bootstrap .jconfirm-box div.jconfirm-closeIcon {
             color: rgba(0, 0, 0, 0.87)
         }
-
+        
         .jconfirm.jconfirm-bootstrap .jconfirm-box div.jconfirm-title-c {
             color: rgba(0, 0, 0, 0.87);
             font-size: 22px;
@@ -1456,12 +1443,12 @@
             padding-left: 15px;
             padding-right: 15px
         }
-
+        
         .jconfirm.jconfirm-bootstrap .jconfirm-box div.jconfirm-content {
             color: rgba(0, 0, 0, 0.87);
             padding: 0 15px
         }
-
+        
         .jconfirm.jconfirm-bootstrap .jconfirm-box .jconfirm-buttons {
             text-align: right;
             padding: 10px;
@@ -1470,34 +1457,34 @@
             overflow: hidden;
             border-radius: 0 0 4px 4px
         }
-
+        
         .jconfirm.jconfirm-bootstrap .jconfirm-box .jconfirm-buttons button {
             font-weight: 500
         }
-
+        
         .jconfirm.jconfirm-bootstrap.jconfirm-rtl .jconfirm-title-c .jconfirm-icon-c {
             margin-left: 8px;
             margin-right: 0
         }
-
+        
         .jconfirm.jconfirm-modern .jconfirm-bg {
             background-color: slategray;
             opacity: .6
         }
-
+        
         .jconfirm.jconfirm-modern .jconfirm-box {
             background-color: white;
             -webkit-box-shadow: 0 7px 8px -4px rgba(0, 0, 0, 0.2), 0 13px 19px 2px rgba(0, 0, 0, 0.14), 0 5px 24px 4px rgba(0, 0, 0, 0.12);
             box-shadow: 0 7px 8px -4px rgba(0, 0, 0, 0.2), 0 13px 19px 2px rgba(0, 0, 0, 0.14), 0 5px 24px 4px rgba(0, 0, 0, 0.12);
             padding: 30px 30px 15px
         }
-
+        
         .jconfirm.jconfirm-modern .jconfirm-box div.jconfirm-closeIcon {
             color: rgba(0, 0, 0, 0.87);
             top: 15px;
             right: 15px
         }
-
+        
         .jconfirm.jconfirm-modern .jconfirm-box div.jconfirm-title-c {
             color: rgba(0, 0, 0, 0.87);
             font-size: 24px;
@@ -1505,7 +1492,7 @@
             text-align: center;
             margin-bottom: 10px
         }
-
+        
         .jconfirm.jconfirm-modern .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
             -webkit-transition: -webkit-transform .5s;
             transition: -webkit-transform .5s;
@@ -1520,18 +1507,18 @@
             font-size: 69px;
             color: #aaa
         }
-
+        
         .jconfirm.jconfirm-modern .jconfirm-box div.jconfirm-content {
             text-align: center;
             font-size: 15px;
             color: #777;
             margin-bottom: 25px
         }
-
+        
         .jconfirm.jconfirm-modern .jconfirm-box .jconfirm-buttons {
             text-align: center
         }
-
+        
         .jconfirm.jconfirm-modern .jconfirm-box .jconfirm-buttons button {
             font-weight: bold;
             text-transform: uppercase;
@@ -1539,11 +1526,11 @@
             transition: background .1s;
             padding: 10px 20px
         }
-
+        
         .jconfirm.jconfirm-modern .jconfirm-box .jconfirm-buttons button+button {
             margin-left: 4px
         }
-
+        
         .jconfirm.jconfirm-modern.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
             -webkit-transform: scale(1);
             transform: scale(1)
@@ -1552,27 +1539,26 @@
     <style class="darkreader darkreader--sync" media="screen"></style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 
-    
+
     <!--<script src="https://www.google.com/recaptcha/api.js?onload=CaptchaCallback&render=explicit" async defer></script>
 	<script>var CaptchaCallback = function() { jQuery('.g-recaptcha').each(function(index, el) { var widgetId = grecaptcha.render(el, {'sitekey' : '6Le4v7YUAAAAALujS6s9Fg-wWwsyUz3Lg_geEMZk'});jQuery(this).attr('data-widget-id', widgetId);});};</script>
 	!-->
 
     <style>
         @import url(https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900);
-
         input {
             width: 240px;
             height: 30px;
             text-align: left;
         }
-
+        
         .wrapper {
             height: 100vh;
             overflow-x: hidden;
             overflow-y: auto;
             perspective: 10px;
         }
-
+        
         .section {
             position: relative;
             height: 100vh;
@@ -1580,7 +1566,7 @@
             align-items: center;
             justify-content: center;
         }
-
+        
         .parallax::after {
             content: " ";
             position: absolute;
@@ -1592,15 +1578,15 @@
             background-size: 100%;
             z-index: -1;
         }
-
+        
         .static {
             background: red;
         }
-
+        
         .bg1::after {
             background-image: url('https://voalis.com/cardassets/formbg.png');
         }
-
+        
         .errorCross {
             float: left;
             color: white;
@@ -1612,7 +1598,7 @@
             font-size: 29px;
             display: none;
         }
-
+        
         body {
             background-image: url(https://voalis.com/images/wp.png);
             background-color: white;
@@ -1620,30 +1606,30 @@
             background-position: center;
             font-family: 'Roboto', sans-serif;
         }
-
+        
         @media (max-width: 575.98px) {
             #createCardFormDiv {
                 margin-left: 0px !important;
             }
         }
-
+        
         #maintext {
             transition: 0.5s ease-out;
             position: absolute;
             top: -1000px;
         }
-
+        
         .loginMenuLoginMethod {
             font-weight: 500;
             font-size: 18px;
             float: left;
             cursor: pointer;
         }
-
+        
         .loginMenuLoginMethod img {
             margin-right: 8px;
         }
-
+        
         #loginMenu input {
             width: 293px;
             font-size: 20px;
@@ -1651,34 +1637,33 @@
             height: 50px;
             padding-left: 0px;
         }
-
+        
         #loginMenuForm input {
             border: none;
             outline-width: 0px;
         }
-
+        
         a {
             color: inherit;
         }
-
+        
         a:hover {
             color: inherit;
         }
-
+        
         #mainmenu {
             display: none;
         }
-
-
+        
         #cardsSavedDiv {
             color: white;
         }
-
+        
         #cardsSavedContainer {
             height: 100%;
             display: none;
         }
-
+        
         .likedDivCard {
             text-align: left;
             width: 100%;
@@ -1688,7 +1673,7 @@
             cursor: pointer;
             margin-bottom: 15px;
         }
-
+        
         .likedDivCardImage {
             width: 68px;
             height: 68px;
@@ -1697,11 +1682,11 @@
             background-size: cover;
             margin-left: 20px;
         }
-
+        
         .likedDivCard div {
             font-size: 18px;
         }
-
+        
         .likedDivCardTopText {
             font-weight: 500;
             font-size: 24px;
@@ -1711,13 +1696,13 @@
             position: relative;
             margin-top: 6.5px;
         }
-
+        
         .likedDivCardBottomText {
             white-space: nowrap;
             overflow-x: hidden;
             text-overflow: ellipsis;
         }
-
+        
         #likedMenuBottom {
             width: 80%;
             max-width: 400px;
@@ -1729,14 +1714,14 @@
             height: 30px;
             text-align: left;
         }
-
+        
         .wrapper {
             height: 100vh;
             overflow-x: hidden;
             overflow-y: auto;
             perspective: 10px;
         }
-
+        
         .section {
             position: relative;
             height: 100vh;
@@ -1744,7 +1729,7 @@
             align-items: center;
             justify-content: center;
         }
-
+        
         .parallax::after {
             content: " ";
             position: absolute;
@@ -1756,15 +1741,15 @@
             background-size: 100%;
             z-index: -1;
         }
-
+        
         .static {
             background: red;
         }
-
+        
         .bg1::after {
             background-image: url("https://voalis.com/cardassets/formbg.png");
         }
-
+        
         .errorCross {
             float: left;
             color: white;
@@ -1776,7 +1761,7 @@
             font-size: 29px;
             display: none;
         }
-
+        
         body {
             background-image: url("https://voalis.com/images/wp.png");
             background-color: white;
@@ -1784,30 +1769,30 @@
             background-position: center;
             font-family: 'Roboto', sans-serif;
         }
-
+        
         @media (max-width: 575.98px) {
             #createCardFormDiv {
                 margin-left: 0px !important;
             }
         }
-
+        
         #maintext {
             transition: 0.5s ease-out;
             position: absolute;
             top: -1000px;
         }
-
+        
         .loginMenuLoginMethod {
             font-weight: 500;
             font-size: 18px;
             float: left;
             cursor: pointer;
         }
-
+        
         .loginMenuLoginMethod img {
             margin-right: 8px;
         }
-
+        
         #loginMenu input {
             width: 293px;
             font-size: 20px;
@@ -1815,34 +1800,33 @@
             height: 50px;
             padding-left: 0px;
         }
-
+        
         #loginMenuForm input {
             border: none;
             outline-width: 0px;
         }
-
+        
         a {
             color: inherit;
         }
-
+        
         a:hover {
             color: inherit;
         }
-
+        
         #mainmenu {
             display: none;
         }
-
-
+        
         #cardsSavedDiv {
             color: white;
         }
-
+        
         #cardsSavedContainer {
             height: 100%;
             display: none;
         }
-
+        
         .likedDivCard {
             text-align: left;
             width: 100%;
@@ -1852,7 +1836,7 @@
             cursor: pointer;
             margin-bottom: 15px;
         }
-
+        
         .likedDivCardImage {
             width: 68px;
             height: 68px;
@@ -1861,11 +1845,11 @@
             background-size: cover;
             margin-left: 20px;
         }
-
+        
         .likedDivCard div {
             font-size: 18px;
         }
-
+        
         .likedDivCardTopText {
             font-weight: 500;
             font-size: 24px;
@@ -1875,13 +1859,13 @@
             position: relative;
             margin-top: 6.5px;
         }
-
+        
         .likedDivCardBottomText {
             white-space: nowrap;
             overflow-x: hidden;
             text-overflow: ellipsis;
         }
-
+        
         #likedMenuBottom {
             width: 80%;
             max-width: 400px;
@@ -1898,7 +1882,7 @@
         if (matchMedia('(display-mode: standalone)').matches) appMode = true;
 
         var auth = storage.getItem("auth");
-        var loggedIn = (auth != null);
+        //var loggedIn = (auth != null);
         if (loggedIn) auth = auth.split(",");
 
         var savedNoLogin = storage.getItem("savedNoLogin");
@@ -1937,7 +1921,7 @@
             $("#firstButtonText2").text("Voalis card existente").attr("x", "98");
             $("#firstButtonUndertext").text("Ou, criar um novo cartão").attr("x", "115").css("cursor", "pointer");
 
-            $("#firstButtonUndertext").click(function () {
+            $("#firstButtonUndertext").click(function() {
                 storage.clear();
                 openCardRequest();
             });
@@ -1945,7 +1929,7 @@
 
         var loadedScripts = [];
 
-        jQuery.loadScript = function (url, callback) {
+        jQuery.loadScript = function(url, callback) {
             if (loadedScripts.includes(url)) return callback();
             loadedScripts.push(url);
 
@@ -1992,8 +1976,12 @@
             $.ajax(url, {
                 type: 'POST',
                 data: data,
-                success: function (result) { onComplete(result) },
-                error: function (result) { onComplete(result) }
+                success: function(result) {
+                    onComplete(result)
+                },
+                error: function(result) {
+                    onComplete(result)
+                }
             });
         }
 
@@ -2058,7 +2046,11 @@
                 return nopeShake($("#loginError").text("Numero inválido."));
             if (!/^(.{4,64})$/.test(loginPassword)) return nopeShake($("#loginError").text("Senha incorreta."));
 
-            sendData({ "logincardpassword": loginPassword, "logincardcode": loginCode, "logincardmethod": curLoginMethod }, onValidateCardLogin);
+            sendData({
+                "logincardpassword": loginPassword,
+                "logincardcode": loginCode,
+                "logincardmethod": curLoginMethod
+            }, onValidateCardLogin);
         }
 
         function requestCardNewPassword() {
@@ -2068,7 +2060,10 @@
             //if(!/^([a-z0-9A-Z]{6,18})$/.test(newPasswordCode)) return nopeShake($("#requestCardEditError").text("Link inválido"));
             //if(!validateEmail(newPasswordEmail)) return nopeShake($("#requestCardEditError").text("Email incorreta"));
 
-            sendData({ "requestCardNewPasswordLoginInfo": newPasswordCode, "requestCardNewPasswordLoginMethod": curLoginMethod }, onValidateCardEditRequest);
+            sendData({
+                "requestCardNewPasswordLoginInfo": newPasswordCode,
+                "requestCardNewPasswordLoginMethod": curLoginMethod
+            }, onValidateCardEditRequest);
         }
 
         function alterPass() {
@@ -2079,7 +2074,10 @@
             if (alterPassNew.length < 6) return nopeShake($("#alterPassError").text("Senha muito pequena."));
             if (alterPassNew.length > 64) return nopeShake($("#alterPassError").text("Senha muito pequena."));
 
-            sendData({ "alterCardPasswordAlterCode": alterPassCode, "alterPassNewPassword": alterPassNew }, onValidateAlterPass);
+            sendData({
+                "alterCardPasswordAlterCode": alterPassCode,
+                "alterPassNewPassword": alterPassNew
+            }, onValidateAlterPass);
         }
 
         function onValidateCardLogin(response) {
@@ -2118,10 +2116,12 @@
         function alterPasswordComplete() {
             $("#alterPassMenu").fadeOut(250);
             $("#alterPassDone").delay(250).fadeIn(250);
-            setTimeout(function () { location.reload(); }, 4000);
+            setTimeout(function() {
+                location.reload();
+            }, 4000);
         }
 
-        jQuery.loadScript = function (url, callback) {
+        jQuery.loadScript = function(url, callback) {
             jQuery.ajax({
                 url: url,
                 dataType: 'script',
@@ -2142,9 +2142,9 @@
         };
 
         function loadFirebaseAnalytics() {
-            $.loadScript("https://www.gstatic.com/firebasejs/7.9.0/firebase-app.js", function () {
+            $.loadScript("https://www.gstatic.com/firebasejs/7.9.0/firebase-app.js", function() {
                 firebase.initializeApp(firebaseConfig);
-                $.loadScript("https://www.gstatic.com/firebasejs/7.9.1/firebase-analytics.js", function () {
+                $.loadScript("https://www.gstatic.com/firebasejs/7.9.1/firebase-analytics.js", function() {
                     firebase.analytics();
                 });
             });
@@ -2168,7 +2168,7 @@
         };
 
         function loadSVGImages(webp) {
-            $("image").each(function () {
+            $("image").each(function() {
                 var thisSrc = this.getAttribute("data-src");
                 if (webp && (thisSrc.endsWith("img1.png") || thisSrc.endsWith("img2.png"))) thisSrc = thisSrc.replace(".png", ".webp");
                 console.log(thisSrc);
@@ -2178,7 +2178,7 @@
 
         var alternativeLanding = 0;
 
-        $(function () {
+        $(function() {
             if (storage.getItem("alterKey") != null) storage.clear();
 
             var mainMenuSVG = $("#mainMenuSVG_pt").show();
@@ -2230,19 +2230,19 @@
             }
 
             //$("#firstButtonUndertext").text("Ou, faça login no seu card").attr("x","110").css("cursor","pointer");
-            $("#firstButtonUndertext").click(function () {
+            $("#firstButtonUndertext").click(function() {
                 openEditCardMenu();
             });
 
 
-            $('#loginMenuPasswordTextbox').on('keydown', function (event) {
+            $('#loginMenuPasswordTextbox').on('keydown', function(event) {
                 if (event.key === "Enter") {
                     event.preventDefault();
                     loginCard();
                 }
             });
 
-            $('#searchBarInput').on('keydown', function (event) {
+            $('#searchBarInput').on('keydown', function(event) {
                 if (event.key === "Enter") {
                     event.preventDefault();
                     modifyURL(searchState, $('#searchBarInput').val());
@@ -2264,7 +2264,7 @@
                 $("#topCardsContainer").show();
                 if (topNearMe['top']['stateMode'] == 1) {
                     topLocationText = fullStateNameArtigo[topNearMe['top']['location']] + " " + fullStateName[topNearMe['top']['location']];
-                    $("#topLocationText").click(function () {
+                    $("#topLocationText").click(function() {
                         askState();
                     }).css("cursor", "pointer");
                 } else {
@@ -2324,7 +2324,7 @@
                 $("#mainMenu").show().css("display", "flex");
                 if (language == "es") {
                     $("#spanishTopInOldKnowMore").show().parent().show();
-                    setTimeout(function () {
+                    setTimeout(function() {
                         document.querySelector("#spanishTopInOldKnowMore").appendChild(document.querySelector("#topCardsContainer"));
                     }, 250);
                 }
@@ -2451,7 +2451,7 @@
                     'ok': {
                         text: 'Escolher estado',
                         btnClass: 'btn-blue',
-                        action: function () {
+                        action: function() {
                             changeState(askStateSelectVal);
                         }
                     }
@@ -2626,13 +2626,13 @@
 
                 $("#cardsCategorySelectMenu").css("height", "100%");
 
-                setTimeout(function () {
+                setTimeout(function() {
                     $("#cardsCategorySelectMenu").css("height", "0%");
                 }, 100);
 
                 $("#noCategory").css("margin-bottom", "0px");
 
-                setTimeout(function () {
+                setTimeout(function() {
                     $("#noCategory").hide();
 
                     if (searchCategory > -1) $("#hasCategory, #resetCategory").show();
@@ -2648,7 +2648,7 @@
                 $("#hasCategory, #resetCategory").hide();
                 $("#cardsCategorySelectMenu").show().css("height", "200%");
 
-                setTimeout(function () {
+                setTimeout(function() {
                     $("#cardsCategorySelectMenu").css("height", "auto");
                     animatingCategoryImages = false;
                 }, 500);
@@ -2690,7 +2690,7 @@
                 internationalizeLoginInput("#loginMenuIdentificationMethodTextbox");
             }
 
-            $("#chooseLoginMethod").fadeOut(125, function () {
+            $("#chooseLoginMethod").fadeOut(125, function() {
                 $("#loginMenuActual").fadeIn(125);
             });
         }
@@ -2746,34 +2746,71 @@
             else internationalizeLoginInput("#requestNewPasswordIdentificationMethodTextbox");
         }
 
-        var topNearMe = { "dinamica": { "code": "dinamica", "logo": 1, "name": "DINAMICA  ENGENHARIA ", "boostlevel": 1, "background": "architect7", "framecolor": "876a1d", "description": "ENGENHARIA E MARCENARIA " }, "mirianmanoel": { "code": "mirianmanoel", "logo": 0, "name": "Mirian Manoel da Silva", "boostlevel": 1, "background": "science2", "framecolor": "9964bd", "description": "Psic\u00f3loga  CRP- 06\/51526-4" }, "daianastore": { "code": "daianastore", "logo": 0, "name": "Daiana_Store ", "boostlevel": 0, "background": "custom", "framecolor": "000000", "description": "Loja Online" }, "canilenchantress": { "code": "canilenchantress", "logo": 0, "name": "Canil Enchantress ", "boostlevel": 0, "background": "custom", "framecolor": "000000", "description": "Cria\u00e7\u00e3o \u00c9tica e humanizada " }, "top": { "stateMode": 0, "location": "pt" } };
-/*
-        <main class="wrapper">
-          <section class="section parallax bg1">
-          </section>
-        </main>
-        */
+        var topNearMe = {
+            "dinamica": {
+                "code": "dinamica",
+                "logo": 1,
+                "name": "DINAMICA  ENGENHARIA ",
+                "boostlevel": 1,
+                "background": "architect7",
+                "framecolor": "876a1d",
+                "description": "ENGENHARIA E MARCENARIA "
+            },
+            "mirianmanoel": {
+                "code": "mirianmanoel",
+                "logo": 0,
+                "name": "Mirian Manoel da Silva",
+                "boostlevel": 1,
+                "background": "science2",
+                "framecolor": "9964bd",
+                "description": "Psic\u00f3loga  CRP- 06\/51526-4"
+            },
+            "daianastore": {
+                "code": "daianastore",
+                "logo": 0,
+                "name": "Daiana_Store ",
+                "boostlevel": 0,
+                "background": "custom",
+                "framecolor": "000000",
+                "description": "Loja Online"
+            },
+            "canilenchantress": {
+                "code": "canilenchantress",
+                "logo": 0,
+                "name": "Canil Enchantress ",
+                "boostlevel": 0,
+                "background": "custom",
+                "framecolor": "000000",
+                "description": "Cria\u00e7\u00e3o \u00c9tica e humanizada "
+            },
+            "top": {
+                "stateMode": 0,
+                "location": "pt"
+            }
+        };
+        /*
+                <main class="wrapper">
+                  <section class="section parallax bg1">
+                  </section>
+                </main>
+                */
     </script>
     <center style="width:100%;transition: backdrop-filter 0.4s;" data-nosnippet="">
 
 
 
-        <div id="loginMenu"
-            style="min-height: 800px; width: 100%; max-width: 400px; background-color: white; text-align: center; z-index: 2; display: none; --darkreader-inline-bgcolor:#dcdad7;"
-            data-darkreader-inline-bgcolor="">
+        <div id="loginMenu" style="min-height: 800px; width: 100%; max-width: 400px; background-color: white; text-align: center; z-index: 2; display: none; --darkreader-inline-bgcolor:#dcdad7;" data-darkreader-inline-bgcolor="">
 
             <!-- onclick="deinternationalizeInput();$('#loginMenu, #loginMenuActual, #requestNewPasswordDoneMenu, #requestNewPasswordMenu').fadeOut(250);$('#chooseLoginMethod, .#newHomepage').delay(250).fadeIn(125);"  !-->
 
-            <div onclick="if (window.location.href.endsWith('login')) {window.location='https://voalis.com/'} else { window.location.reload() }"
-                style="cursor: pointer; position: absolute; font-size: 42px; line-height: 40px; height: 40px; width: 40px; border-bottom-left-radius: 16px; color: white; top: 0px; margin-left: 365px; background-color: black; --darkreader-inline-color:#dcdad7; --darkreader-inline-bgcolor:#181a1b;"
+            <div onclick="if (window.location.href.endsWith('login')) {window.location='https://voalis.com/'} else { window.location.reload() }" style="cursor: pointer; position: absolute; font-size: 42px; line-height: 40px; height: 40px; width: 40px; border-bottom-left-radius: 16px; color: white; top: 0px; margin-left: 365px; background-color: black; --darkreader-inline-color:#dcdad7; --darkreader-inline-bgcolor:#181a1b;"
                 data-darkreader-inline-color="" data-darkreader-inline-bgcolor="">×</div>
 
             <img src="https://voalis.com/images/vlsdiamond.png" style="max-width: 300px;margin-top:30px;">
 
             <br><br>
-            <div id="loginMenuHeader"
-                style="background-color: rgb(41, 41, 41); width: 100%; line-height: 20px; padding: 5px 0px; height: 50px; font-size: 20px; color: white; --darkreader-inline-bgcolor:#35393c; --darkreader-inline-color:#dcdad7;"
-                data-darkreader-inline-bgcolor="" data-darkreader-inline-color="">
+            <div id="loginMenuHeader" style="background-color: rgb(41, 41, 41); width: 100%; line-height: 20px; padding: 5px 0px; height: 50px; font-size: 20px; color: white; --darkreader-inline-bgcolor:#35393c; --darkreader-inline-color:#dcdad7;" data-darkreader-inline-bgcolor=""
+                data-darkreader-inline-color="">
                 Como deseja fazer login<br>em sua conta?
             </div>
 
@@ -2787,24 +2824,21 @@
 
 
                     <div class="loginMenuLoginMethod" onclick="openLoginZiggy('voalis')">
-                        <img style="width:75px;" src="https://voalis.com/cardassets/buttons/voalis.svg">
-                        Nome de Usuário
+                        <img style="width:75px;" src="https://voalis.com/cardassets/buttons/voalis.svg"> Nome de Usuário
                     </div>
 
                     <br><br>
                     <br><br>
 
                     <div class="loginMenuLoginMethod" onclick="openLoginZiggy('email')">
-                        <img style="width:75px;" src="https://voalis.com/cardassets/buttons/email.svg">
-                        Email
+                        <img style="width:75px;" src="https://voalis.com/cardassets/buttons/email.svg"> Email
                     </div>
 
                     <br><br>
                     <br><br>
 
                     <div class="loginMenuLoginMethod" onclick="openLoginZiggy('phone')">
-                        <img style="width:75px;" src="https://voalis.com/cardassets/buttons/phone.svg">
-                        Número de Telefone
+                        <img style="width:75px;" src="https://voalis.com/cardassets/buttons/phone.svg"> Número de Telefone
                     </div>
 
                 </div>
@@ -2813,14 +2847,10 @@
 
                     <div id="loginMenuForm" style="position:absolute;margin-left: 53px;margin-top: 80px;">
                         <input id="loginMenuIdentificationMethodTextbox"><br>
-                        <input id="loginMenuPasswordTextbox" type="password" style="margin-top:30px;"
-                            placeholder="Senha">
+                        <input id="loginMenuPasswordTextbox" type="password" style="margin-top:30px;" placeholder="Senha">
                     </div>
 
-                    <svg style="width:300px;height:auto;" version="1.1" viewBox="0 0 179.11 174.4"
-                        xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#"
-                        xmlns:dc="http://purl.org/dc/elements/1.1/"
-                        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                    <svg style="width:300px;height:auto;" version="1.1" viewBox="0 0 179.11 174.4" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
                         xmlns:xlink="http://www.w3.org/1999/xlink">
                         <defs>
                             <linearGradient id="linearGradient867-7" x1="32.499" x2="164.26" y1="166.64" y2="166.64"
@@ -2886,8 +2916,7 @@
 
                     <span id="loginError"></span>
 
-                    <br><br><span style="text-decoration:underline;cursor:pointer;"
-                        onclick="openForgotPasswordMenu()">Esqueci minha senha, ou primeiro acesso.</span><br>
+                    <br><br><span style="text-decoration:underline;cursor:pointer;" onclick="openForgotPasswordMenu()">Esqueci minha senha, ou primeiro acesso.</span><br>
 
                     <br><br>
 
@@ -2899,9 +2928,7 @@
 
 
 
-            <div id="requestNewPasswordMenu"
-                style="min-height: 100%; width: 100%; max-width: 400px; text-align: center; z-index: 2; color: white; display: none; --darkreader-inline-color:#dcdad7;"
-                data-darkreader-inline-color="">
+            <div id="requestNewPasswordMenu" style="min-height: 100%; width: 100%; max-width: 400px; text-align: center; z-index: 2; color: white; display: none; --darkreader-inline-color:#dcdad7;" data-darkreader-inline-color="">
 
                 <span id="requestNewPasswordIdentificationMethodText"></span>:<br>
                 <input id="requestNewPasswordIdentificationMethodTextbox"><br>
@@ -2909,8 +2936,7 @@
                 <br><br>
 
                 <center>
-                    <div onclick="requestCardNewPassword()"
-                        style="font-size: 18px; font-weight: 400; cursor: pointer; width: 250px; height: 50px; line-height: 50px; background-color: rgb(95, 139, 207); color: white; --darkreader-inline-bgcolor:#477cd0; --darkreader-inline-color:#dcdad7;"
+                    <div onclick="requestCardNewPassword()" style="font-size: 18px; font-weight: 400; cursor: pointer; width: 250px; height: 50px; line-height: 50px; background-color: rgb(95, 139, 207); color: white; --darkreader-inline-bgcolor:#477cd0; --darkreader-inline-color:#dcdad7;"
                         data-darkreader-inline-bgcolor="" data-darkreader-inline-color="">Continuar</div>
                 </center>
 
@@ -2918,16 +2944,12 @@
 
 
 
-                <span id="requestCardEditError" style="color: black; --darkreader-inline-color:#181a1b;"
-                    data-darkreader-inline-color=""></span>
+                <span id="requestCardEditError" style="color: black; --darkreader-inline-color:#181a1b;" data-darkreader-inline-color=""></span>
 
             </div>
 
-            <div id="requestNewPasswordDoneMenu"
-                style="display: none; height: 100%; width: 100%; max-width: 400px; font-size: 20px; text-align: center; z-index: 2; color: black; --darkreader-inline-color:#181a1b;"
-                data-darkreader-inline-color="">
-                <img src="https://voalis.com/appupdate/img/checkmark.svg"
-                    style="width: 120px;filter: invert(1);height:auto;font-size:22px;">
+            <div id="requestNewPasswordDoneMenu" style="display: none; height: 100%; width: 100%; max-width: 400px; font-size: 20px; text-align: center; z-index: 2; color: black; --darkreader-inline-color:#181a1b;" data-darkreader-inline-color="">
+                <img src="https://voalis.com/appupdate/img/checkmark.svg" style="width: 120px;filter: invert(1);height:auto;font-size:22px;">
                 <br><br>
                 <div id="requestNewPasswordDoneText"><br>
                 </div>
@@ -2944,11 +2966,9 @@
 
 
 
-        <div id="editCardMenu"
-            style="box-shadow: rgb(28, 107, 149) 0px 0px 2px 2px; height: 100%; min-height: 800px; width: 100%; max-width: 400px; text-align: center; z-index: 2; color: white; background-color: rgb(28, 107, 149); display: none; --darkreader-inline-boxshadow:#3c667c 0px 0px 2px 2px; --darkreader-inline-color:#dcdad7; --darkreader-inline-bgcolor:#3c667c;"
+        <div id="editCardMenu" style="box-shadow: rgb(28, 107, 149) 0px 0px 2px 2px; height: 100%; min-height: 800px; width: 100%; max-width: 400px; text-align: center; z-index: 2; color: white; background-color: rgb(28, 107, 149); display: none; --darkreader-inline-boxshadow:#3c667c 0px 0px 2px 2px; --darkreader-inline-color:#dcdad7; --darkreader-inline-bgcolor:#3c667c;"
             data-darkreader-inline-boxshadow="" data-darkreader-inline-color="" data-darkreader-inline-bgcolor="">
-            <div style="float: right;margin: -12px 8px 0px 0px;font-size: 46px;cursor:pointer;"
-                onclick="$('#mainMenu').css('visibility','visible').css('display','flex').delay(250).fadeIn(250);$('#editCardMenu').fadeOut(250);">
+            <div style="float: right;margin: -12px 8px 0px 0px;font-size: 46px;cursor:pointer;" onclick="$('#mainMenu').css('visibility','visible').css('display','flex').delay(250).fadeIn(250);$('#editCardMenu').fadeOut(250);">
                 ×</div>
             <br><br><br>
             <h2>Fazer login em <br>seu Voalis Card</h2><br><br>
@@ -2957,40 +2977,28 @@
             <span style="font-size: 19px;">Link do seu Card:<br></span><br>
 
             <div style="width: 100%; text-align: left; ">
-                <span
-                    style="left: 20px; font-size: 20px; top: -9px; position: relative; color: white; --darkreader-inline-color:#dcdad7;"
-                    data-darkreader-inline-color="">https://voalis.cards/</span>
-                <input id="editCardCodeInput"
-                    style="background-color: rgba(0, 0, 0, 0.3); color: white; text-align: left; width: 100%; padding-left: 202px; position: relative; height: 50px; top: -50px; border: none; font-size: 20px; --darkreader-inline-bgcolor:rgba(24, 26, 27, 0.3); --darkreader-inline-color:#dcdad7; --darkreader-inline-border-top: initial; --darkreader-inline-border-right: initial; --darkreader-inline-border-bottom: initial; --darkreader-inline-border-left: initial;"
-                    data-darkreader-inline-bgcolor="" data-darkreader-inline-color=""
-                    data-darkreader-inline-border-top="" data-darkreader-inline-border-right=""
-                    data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left="">
+                <span style="left: 20px; font-size: 20px; top: -9px; position: relative; color: white; --darkreader-inline-color:#dcdad7;" data-darkreader-inline-color="">https://voalis.cards/</span>
+                <input id="editCardCodeInput" style="background-color: rgba(0, 0, 0, 0.3); color: white; text-align: left; width: 100%; padding-left: 202px; position: relative; height: 50px; top: -50px; border: none; font-size: 20px; --darkreader-inline-bgcolor:rgba(24, 26, 27, 0.3); --darkreader-inline-color:#dcdad7; --darkreader-inline-border-top: initial; --darkreader-inline-border-right: initial; --darkreader-inline-border-bottom: initial; --darkreader-inline-border-left: initial;"
+                    data-darkreader-inline-bgcolor="" data-darkreader-inline-color="" data-darkreader-inline-border-top="" data-darkreader-inline-border-right="" data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left="">
             </div>
 
 
             <span style="font-size: 19px;">Senha:<br></span><br>
 
             <div style="width: 100%; text-align: left;">
-                <input id="editCardPasswordInput"
-                    style="background-color: rgba(0, 0, 0, 0.3); color: white; text-align: center; width: 100%; position: relative; height: 50px; top: -20px; border: none; font-size: 20px; --darkreader-inline-bgcolor:rgba(24, 26, 27, 0.3); --darkreader-inline-color:#dcdad7; --darkreader-inline-border-top: initial; --darkreader-inline-border-right: initial; --darkreader-inline-border-bottom: initial; --darkreader-inline-border-left: initial;"
-                    type="password" data-darkreader-inline-bgcolor="" data-darkreader-inline-color=""
-                    data-darkreader-inline-border-top="" data-darkreader-inline-border-right=""
-                    data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left="">
+                <input id="editCardPasswordInput" style="background-color: rgba(0, 0, 0, 0.3); color: white; text-align: center; width: 100%; position: relative; height: 50px; top: -20px; border: none; font-size: 20px; --darkreader-inline-bgcolor:rgba(24, 26, 27, 0.3); --darkreader-inline-color:#dcdad7; --darkreader-inline-border-top: initial; --darkreader-inline-border-right: initial; --darkreader-inline-border-bottom: initial; --darkreader-inline-border-left: initial;"
+                    type="password" data-darkreader-inline-bgcolor="" data-darkreader-inline-color="" data-darkreader-inline-border-top="" data-darkreader-inline-border-right="" data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left="">
             </div>
 
             <br>
-            <button onclick="loginCard()"
-                style="background-color: rgba(71, 153, 225, 0.4); color: white; text-align: center; width: 50%; height: 50px; border: none; --darkreader-inline-bgcolor:rgba(68, 141, 205, 0.4); --darkreader-inline-color:#dcdad7; --darkreader-inline-border-top: initial; --darkreader-inline-border-right: initial; --darkreader-inline-border-bottom: initial; --darkreader-inline-border-left: initial;"
-                data-darkreader-inline-bgcolor="" data-darkreader-inline-color="" data-darkreader-inline-border-top=""
-                data-darkreader-inline-border-right="" data-darkreader-inline-border-bottom=""
-                data-darkreader-inline-border-left="">Fazer login</button>
+            <button onclick="loginCard()" style="background-color: rgba(71, 153, 225, 0.4); color: white; text-align: center; width: 50%; height: 50px; border: none; --darkreader-inline-bgcolor:rgba(68, 141, 205, 0.4); --darkreader-inline-color:#dcdad7; --darkreader-inline-border-top: initial; --darkreader-inline-border-right: initial; --darkreader-inline-border-bottom: initial; --darkreader-inline-border-left: initial;"
+                data-darkreader-inline-bgcolor="" data-darkreader-inline-color="" data-darkreader-inline-border-top="" data-darkreader-inline-border-right="" data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left="">Fazer login</button>
             <br><br>
 
         </div>
 
 
-        <div id="alterPassMenu"
-            style="box-shadow: rgb(28, 107, 149) 0px 0px 2px 2px; height: 100%; width: 100%; max-width: 400px; text-align: center; z-index: 2; color: white; background-color: rgb(28, 107, 149); display: none; --darkreader-inline-boxshadow:#3c667c 0px 0px 2px 2px; --darkreader-inline-color:#dcdad7; --darkreader-inline-bgcolor:#3c667c;"
+        <div id="alterPassMenu" style="box-shadow: rgb(28, 107, 149) 0px 0px 2px 2px; height: 100%; width: 100%; max-width: 400px; text-align: center; z-index: 2; color: white; background-color: rgb(28, 107, 149); display: none; --darkreader-inline-boxshadow:#3c667c 0px 0px 2px 2px; --darkreader-inline-color:#dcdad7; --darkreader-inline-bgcolor:#3c667c;"
             data-darkreader-inline-boxshadow="" data-darkreader-inline-color="" data-darkreader-inline-bgcolor="">
             <br><br>
             <h2>Esqueci minha senha</h2><br><br>
@@ -2998,11 +3006,8 @@
             <span style="font-size: 19px;">Nova senha:<br></span><br>
 
             <div style="width: 100%; text-align: left;">
-                <input id="alterPassNewPasswordInput"
-                    style="background-color: rgba(0, 0, 0, 0.3); color: white; text-align: center; width: 100%; position: relative; height: 50px; top: -20px; border: none; font-size: 20px; --darkreader-inline-bgcolor:rgba(24, 26, 27, 0.3); --darkreader-inline-color:#dcdad7; --darkreader-inline-border-top: initial; --darkreader-inline-border-right: initial; --darkreader-inline-border-bottom: initial; --darkreader-inline-border-left: initial;"
-                    type="password" data-darkreader-inline-bgcolor="" data-darkreader-inline-color=""
-                    data-darkreader-inline-border-top="" data-darkreader-inline-border-right=""
-                    data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left="">
+                <input id="alterPassNewPasswordInput" style="background-color: rgba(0, 0, 0, 0.3); color: white; text-align: center; width: 100%; position: relative; height: 50px; top: -20px; border: none; font-size: 20px; --darkreader-inline-bgcolor:rgba(24, 26, 27, 0.3); --darkreader-inline-color:#dcdad7; --darkreader-inline-border-top: initial; --darkreader-inline-border-right: initial; --darkreader-inline-border-bottom: initial; --darkreader-inline-border-left: initial;"
+                    type="password" data-darkreader-inline-bgcolor="" data-darkreader-inline-color="" data-darkreader-inline-border-top="" data-darkreader-inline-border-right="" data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left="">
             </div>
 
             <br>
@@ -3010,123 +3015,109 @@
             <span style="font-size: 19px;">Confirmar nova senha:<br></span><br>
 
             <div style="width: 100%; text-align: left;">
-                <input id="alterPassNewPasswordAgainInput"
-                    style="background-color: rgba(0, 0, 0, 0.3); color: white; text-align: center; width: 100%; position: relative; height: 50px; top: -20px; border: none; font-size: 20px; --darkreader-inline-bgcolor:rgba(24, 26, 27, 0.3); --darkreader-inline-color:#dcdad7; --darkreader-inline-border-top: initial; --darkreader-inline-border-right: initial; --darkreader-inline-border-bottom: initial; --darkreader-inline-border-left: initial;"
-                    type="password" data-darkreader-inline-bgcolor="" data-darkreader-inline-color=""
-                    data-darkreader-inline-border-top="" data-darkreader-inline-border-right=""
-                    data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left="">
+                <input id="alterPassNewPasswordAgainInput" style="background-color: rgba(0, 0, 0, 0.3); color: white; text-align: center; width: 100%; position: relative; height: 50px; top: -20px; border: none; font-size: 20px; --darkreader-inline-bgcolor:rgba(24, 26, 27, 0.3); --darkreader-inline-color:#dcdad7; --darkreader-inline-border-top: initial; --darkreader-inline-border-right: initial; --darkreader-inline-border-bottom: initial; --darkreader-inline-border-left: initial;"
+                    type="password" data-darkreader-inline-bgcolor="" data-darkreader-inline-color="" data-darkreader-inline-border-top="" data-darkreader-inline-border-right="" data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left="">
             </div>
 
             <br>
-            <button onclick="alterPass()"
-                style="background-color: rgba(71, 153, 225, 0.4); color: white; text-align: center; width: 50%; height: 50px; border: none; --darkreader-inline-bgcolor:rgba(68, 141, 205, 0.4); --darkreader-inline-color:#dcdad7; --darkreader-inline-border-top: initial; --darkreader-inline-border-right: initial; --darkreader-inline-border-bottom: initial; --darkreader-inline-border-left: initial;"
-                data-darkreader-inline-bgcolor="" data-darkreader-inline-color="" data-darkreader-inline-border-top=""
-                data-darkreader-inline-border-right="" data-darkreader-inline-border-bottom=""
-                data-darkreader-inline-border-left="">Alterar Senha</button>
+            <button onclick="alterPass()" style="background-color: rgba(71, 153, 225, 0.4); color: white; text-align: center; width: 50%; height: 50px; border: none; --darkreader-inline-bgcolor:rgba(68, 141, 205, 0.4); --darkreader-inline-color:#dcdad7; --darkreader-inline-border-top: initial; --darkreader-inline-border-right: initial; --darkreader-inline-border-bottom: initial; --darkreader-inline-border-left: initial;"
+                data-darkreader-inline-bgcolor="" data-darkreader-inline-color="" data-darkreader-inline-border-top="" data-darkreader-inline-border-right="" data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left="">Alterar Senha</button>
             <br><br>
 
 
             <span id="alterPassError"></span>
 
         </div>
-    <center>
-    
-        <div id="alterPassDone"
-            style="box-shadow: rgb(28, 107, 149) 0px 0px 2px 2px; height: 100%; width: 100%; max-width: 400px; font-size: 20px; text-align: center; z-index: 2; color: white; background-color: rgb(28, 107, 149); display: none; --darkreader-inline-boxshadow:#3c667c 0px 0px 2px 2px; --darkreader-inline-color:#dcdad7; --darkreader-inline-bgcolor:#3c667c;"
-            data-darkreader-inline-boxshadow="" data-darkreader-inline-color="" data-darkreader-inline-bgcolor="">
-            <br><br><br><br><img src="https://voalis.com/appupdate/img/checkmark.svg"
-                style="width: 120px;height:auto;font-size:22px;"><br><br>Sua senha foi alterada com sucesso<br><br>
-        </div>
+        <center>
+
+            <div id="alterPassDone" style="box-shadow: rgb(28, 107, 149) 0px 0px 2px 2px; height: 100%; width: 100%; max-width: 400px; font-size: 20px; text-align: center; z-index: 2; color: white; background-color: rgb(28, 107, 149); display: none; --darkreader-inline-boxshadow:#3c667c 0px 0px 2px 2px; --darkreader-inline-color:#dcdad7; --darkreader-inline-bgcolor:#3c667c;"
+                data-darkreader-inline-boxshadow="" data-darkreader-inline-color="" data-darkreader-inline-bgcolor="">
+                <br><br><br><br><img src="https://voalis.com/appupdate/img/checkmark.svg" style="width: 120px;height:auto;font-size:22px;"><br><br>Sua senha foi alterada com sucesso<br><br>
+            </div>
 
 
-    </center>
+        </center>
 
-    
 
-    <style>
-        .loggedIn {
-            display: none;
-        }
 
-        @media only screen and (max-width: 745px) {
-            #homepageHeaderButtonsDiv {
-                margin-left: 15px !important;
+        <style>
+            .loggedIn {
+                display: none;
             }
-        }
-
-
-        #topbar {
-            background-color: rgb(24, 24, 24);
-            color: white;
-            font-weight: 500;
-            font-size: 22px;
-            z-index: 2;
-            transition: background-color 0.5s;
-            width: 100%;
-            height: 60px;
-        }
-
-        #topbarInner {
-            width: 100%;
-            max-width: 1000px;
-        }
-
-
-        #topbarIconImage {
-            height: 60px;
-            float: left;
-            cursor: pointer;
-        }
-
-        #topbarRightButtonsWrapper {
-            float: right;
-            margin-top: 11px;
-        }
-
-        #topbarRightButtonsWrapper div {
-            float: left;
-            border-radius: 15px;
-            margin: 0px 5px;
-            padding: 2px 10px;
-            font-weight: 400;
-            cursor: pointer;
-            font-size: 19px;
-            border: 3px #dcdad7c9 solid;
-        }
-
-        
-
-        #cardsExpoWrapper {
-            width: 100%;
-            height: 200px;
-            overflow: hidden;
-            margin-top: 35px;
-        }
-
-        #cardsExpo {
-            width: auto;
-            height: 200px;
-            background: url('https://voalis.com/images/cardlist.webp');
-            background-size: cover;
-            -webkit-animation: marquee 400s linear infinite;
-            animation: marquee 400s linear infinite;
-        }
-
+            
+            @media only screen and (max-width: 745px) {
+                #homepageHeaderButtonsDiv {
+                    margin-left: 15px !important;
+                }
+            }
+            
+            #topbar {
+                background-color: rgb(24, 24, 24);
+                color: white;
+                font-weight: 500;
+                font-size: 22px;
+                z-index: 2;
+                transition: background-color 0.5s;
+                width: 100%;
+                height: 60px;
+            }
+            
+            #topbarInner {
+                width: 100%;
+                max-width: 1000px;
+            }
+            
+            #topbarIconImage {
+                height: 60px;
+                float: left;
+                cursor: pointer;
+            }
+            
+            #topbarRightButtonsWrapper {
+                float: right;
+                margin-top: 11px;
+            }
+            
+            #topbarRightButtonsWrapper div {
+                float: left;
+                border-radius: 15px;
+                margin: 0px 5px;
+                padding: 2px 10px;
+                font-weight: 400;
+                cursor: pointer;
+                font-size: 19px;
+                border: 3px #dcdad7c9 solid;
+            }
+            
+            #cardsExpoWrapper {
+                width: 100%;
+                height: 200px;
+                overflow: hidden;
+                margin-top: 35px;
+            }
+            
+            #cardsExpo {
+                width: auto;
+                height: 200px;
+                background: url('https://voalis.com/images/cardlist.webp');
+                background-size: cover;
+                -webkit-animation: marquee 400s linear infinite;
+                animation: marquee 400s linear infinite;
+            }
+            
             @-webkit-keyframes marquee {
                 from {
                     background-position-x: 0%;
                 }
-
                 to {
                     background-position-x: 1000%;
                 }
             }
-
+            
             @keyframes marquee {
                 from {
                     background-position-x: 0%;
                 }
-
                 to {
                     background-position-x: 1000%;
                 }
@@ -3140,15 +3131,13 @@
 
             <div style="margin-bottom: 50px; background-color: rgb(24, 24, 24); color: white; font-weight: 500; font-size: 22px; z-index: 2; transition: background-color 0.5s ease 0s; width: 100%; height: 50px; position: fixed; --darkreader-inline-bgcolor:#292c2e; --darkreader-inline-color:#dcdad7;"
                 data-darkreader-inline-bgcolor="" data-darkreader-inline-color="">
-                <img src="https://voalis.com/cardassets/img/dashboard/topbaricons/vls.svg"
-                    style="height: 45px; top: 3px; margin-left: -32px; position: absolute;">
+                <img src="https://voalis.com/cardassets/img/dashboard/topbaricons/vls.svg" style="height: 45px; top: 3px; margin-left: -32px; position: absolute;">
             </div>
 
             <br><br>
 
             <div style="width:80%;margin-top:60px;">
-                <div style="color: white; font-size: 20px; line-height: 26px; --darkreader-inline-color:#dcdad7;"
-                    data-darkreader-inline-color="">
+                <div style="color: white; font-size: 20px; line-height: 26px; --darkreader-inline-color:#dcdad7;" data-darkreader-inline-color="">
                     Os cartões de visita Voalis<br>que você salvou estão aqui.</div>
             </div>
 
@@ -3160,27 +3149,21 @@
             <br><br>
 
             <div style="width:80%;">
-                <div style="color: white; font-size: 20px; line-height: 26px; --darkreader-inline-color:#dcdad7;"
-                    data-darkreader-inline-color="">Experimente criar o seu<br>cartão de visita digital.</div><br>
+                <div style="color: white; font-size: 20px; line-height: 26px; --darkreader-inline-color:#dcdad7;" data-darkreader-inline-color="">Experimente criar o seu<br>cartão de visita digital.</div><br>
 
                 <a href="https://voalis.com/?nsv">
                     <div style="width: 300px; margin-bottom: 30px; line-height: 28px; margin-top: 25px; display: inline-block; cursor: pointer; background-color: rgba(255, 255, 255, 0.08); color: white; border-radius: 20px; padding: 10px 20px; font-weight: 500; border: 3px solid rgb(34, 155, 34); font-size: 18px; --darkreader-inline-bgcolor:rgba(220, 218, 215, 0.08); --darkreader-inline-color:#dcdad7; --darkreader-inline-border-top:#3d843d; --darkreader-inline-border-right:#3d843d; --darkreader-inline-border-bottom:#3d843d; --darkreader-inline-border-left:#3d843d;"
-                        data-darkreader-inline-bgcolor="" data-darkreader-inline-color=""
-                        data-darkreader-inline-border-top="" data-darkreader-inline-border-right=""
-                        data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left="">Crie o seu agora
-                        gratuitamente.</div>
+                        data-darkreader-inline-bgcolor="" data-darkreader-inline-color="" data-darkreader-inline-border-top="" data-darkreader-inline-border-right="" data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left="">Crie o seu agora gratuitamente.
+                    </div>
                 </a>
                 <br><br>
                 <a href="https://voalis.com/?login"><span
                         style="color: white; text-decoration: underline; --darkreader-inline-color:#dcdad7;"
                         data-darkreader-inline-color="">Ou, faça login no seu card</span></a>
                 <a href="https://voalis.com/s">
-                    <div class="serviceOpeners"
-                        style="width: 300px; margin-bottom: 30px; line-height: 28px; cursor: pointer; background-color: rgba(255, 255, 255, 0.08); color: white; border-radius: 20px; padding: 10px 20px; border: 3px solid rgb(11, 146, 146); font-size: 18px; display: none; --darkreader-inline-bgcolor:rgba(220, 218, 215, 0.08); --darkreader-inline-color:#dcdad7; --darkreader-inline-border-top:#3b6f6f; --darkreader-inline-border-right:#3b6f6f; --darkreader-inline-border-bottom:#3b6f6f; --darkreader-inline-border-left:#3b6f6f; visibility: visible;"
-                        data-darkreader-inline-bgcolor="" data-darkreader-inline-color=""
-                        data-darkreader-inline-border-top="" data-darkreader-inline-border-right=""
-                        data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left="">Busque mais
-                        cartões<br>na Voalis.</div>
+                    <div class="serviceOpeners" style="width: 300px; margin-bottom: 30px; line-height: 28px; cursor: pointer; background-color: rgba(255, 255, 255, 0.08); color: white; border-radius: 20px; padding: 10px 20px; border: 3px solid rgb(11, 146, 146); font-size: 18px; display: none; --darkreader-inline-bgcolor:rgba(220, 218, 215, 0.08); --darkreader-inline-color:#dcdad7; --darkreader-inline-border-top:#3b6f6f; --darkreader-inline-border-right:#3b6f6f; --darkreader-inline-border-bottom:#3b6f6f; --darkreader-inline-border-left:#3b6f6f; visibility: visible;"
+                        data-darkreader-inline-bgcolor="" data-darkreader-inline-color="" data-darkreader-inline-border-top="" data-darkreader-inline-border-right="" data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left="">Busque mais cartões
+                        <br>na Voalis.</div>
                 </a>
 
             </div>
@@ -3191,8 +3174,7 @@
         <div id="topbar" class="newHomepage">
 
             <div id="topbarInner">
-                <a href="https://voalis.com/"><img id="topbarIconImage"
-                        src="https://voalis.com/images/newvlsbtn.png"></a>
+                <a href="https://voalis.com/"><img id="topbarIconImage" src="https://voalis.com/images/newvlsbtn.png"></a>
 
 
 
@@ -3222,27 +3204,24 @@
             <br>
             <br><br>
 
-            <div id="homepageHeader"
-                style="width: 100%; background-color: rgba(0, 0, 0, 0.685); color: white; font-size: 22px; font-weight: 400; padding: 20px 0px; display: inline-block; --darkreader-inline-bgcolor:#292c2e;; --darkreader-inline-color:#dcdad7;"
-                data-darkreader-inline-bgcolor="" data-darkreader-inline-color="">
-                <div style="text-align:center;margin-top: 2px;line-height:28px;"><p>Voalis é a
-                    nova plataforma de cartão de visita digital 100% gratuita.</p></div>
+            <div id="homepageHeader" style="width: 100%; background-color: rgba(0, 0, 0, 0.685); color: white; font-size: 22px; font-weight: 400; padding: 20px 0px; display: inline-block; --darkreader-inline-bgcolor:#292c2e;; --darkreader-inline-color:#dcdad7;" data-darkreader-inline-bgcolor=""
+                data-darkreader-inline-color="">
+                <div style="text-align:center;margin-top: 2px;line-height:28px;">
+                    <p>Voalis é a nova plataforma de cartão de visita digital 100% gratuita.</p>
+                </div>
 
-                <div style="width:320px;font-size:18px;font-weight:600;text-align:center;margin-top:23px;"
-                    id="homepageHeaderButtonsDiv">
-                    <div class="hideOnLogin"
-                        onclick="$('#newHomepage').fadeOut(150);$('#newHomepageBottomPadding').hide();$('#mainMenu').fadeIn(250).css('display','flex');setTimeout(function() {$('html, body').delay(200).animate({ scrollTop: $('#mainMenu').offset().top }, 500); }, 200);registerNewPageGoogleAnalytics('/?learnmore','Pressed learn more from main')"
-                        style="height: 45px; cursor: pointer; float: left; width: 142px; background-color: rgb(100, 100, 100); padding: 0px 15px; line-height: 45px; text-transform: uppercase; --darkreader-inline-bgcolor:#5f676b;"
-                        data-darkreader-inline-bgcolor=""><p style="text-align: center;">saiba mais</p></div>
+                <div style="width:320px;font-size:18px;font-weight:600;text-align:center;margin-top:23px;" id="homepageHeaderButtonsDiv">
+                    <div class="hideOnLogin" onclick="$('#newHomepage').fadeOut(150);$('#newHomepageBottomPadding').hide();$('#mainMenu').fadeIn(250).css('display','flex');setTimeout(function() {$('html, body').delay(200).animate({ scrollTop: $('#mainMenu').offset().top }, 500); }, 200);registerNewPageGoogleAnalytics('/?learnmore','Pressed learn more from main')"
+                        style="height: 45px; cursor: pointer; float: left; width: 142px; background-color: rgb(100, 100, 100); padding: 0px 15px; line-height: 45px; text-transform: uppercase; --darkreader-inline-bgcolor:#5f676b;" data-darkreader-inline-bgcolor="">
+                        <p style="text-align: center;">saiba mais</p>
+                    </div>
                     <a class="hideOnLogin" href="https://voalis.com/create">
-                        <div onclick="registerNewPageGoogleAnalytics(&quot;/?create&quot;,&quot;Pressed create from main&quot;)"
-                            style="float: left; width: 145px; background-color: rgb(150, 150, 150); padding: 0px 15px; margin-left: 20px; line-height: 18px; text-transform: uppercase; height: 45px; --darkreader-inline-bgcolor:#5f676b;"
+                        <div onclick="registerNewPageGoogleAnalytics(&quot;/?create&quot;,&quot;Pressed create from main&quot;)" style="float: left; width: 145px; background-color: rgb(150, 150, 150); padding: 0px 15px; margin-left: 20px; line-height: 18px; text-transform: uppercase; height: 45px; --darkreader-inline-bgcolor:#5f676b;"
                             data-darkreader-inline-bgcolor=""><span style="top: 5px;position: relative; margin-left: 2px;"><p style="text-align: center;">Crie o
                                 seu<br>agora</p></span></div>
                     </a>
                     <a class="loggedIn" href="https://voalis.com/dashboard">
-                        <div onclick="registerNewPageGoogleAnalytics(&quot;/?myvoalis&quot;,&quot;Pressed my voalis from main&quot;)"
-                            style="height: 45px; cursor: pointer; margin-right: 15px; float: right; width: 158px; background-color: rgb(100, 100, 100); padding: 0px 0px 0px 28px; line-height: 37px; text-transform: uppercase; --darkreader-inline-bgcolor:#5f676b;"
+                        <div onclick="registerNewPageGoogleAnalytics(&quot;/?myvoalis&quot;,&quot;Pressed my voalis from main&quot;)" style="height: 45px; cursor: pointer; margin-right: 15px; float: right; width: 158px; background-color: rgb(100, 100, 100); padding: 0px 0px 0px 28px; line-height: 37px; text-transform: uppercase; --darkreader-inline-bgcolor:#5f676b;"
                             data-darkreader-inline-bgcolor=""><span style="top: 5px;position: relative;">Meu
                                 Voalis</span></div>
                     </a>
@@ -3264,7 +3243,7 @@
                 .serviceOpeners {
                     display: none;
                 }
-
+                
                 .topCardFeatured {
                     float: left;
                     height: 200px;
@@ -3274,12 +3253,12 @@
                     cursor: pointer;
                     position: relative;
                 }
-
+                
                 .topCardFeaturedBoost {
                     height: 200px !important;
                     background-size: 130% !important;
                 }
-
+                
                 .topCardFeatured div:nth-child(1) {
                     font-weight: 500;
                     font-size: 22px;
@@ -3287,7 +3266,7 @@
                     line-height: 20px;
                     width: calc(100% - 12px);
                 }
-
+                
                 .topCardFeatured div:nth-child(2) {
                     font-weight: 300;
                     font-size: 18px;
@@ -3295,7 +3274,7 @@
                     line-height: 20px;
                     width: calc(100% - 12px);
                 }
-
+                
                 .serviceSearchCard {
                     position: relative;
                     display: inline-block;
@@ -3303,70 +3282,65 @@
                     height: 100%;
                     color: white;
                 }
-
+                
                 .serviceSearchCard div+div {
                     margin: 8px 0px;
                 }
-
+                
                 #searchForProfessional {
                     float: left;
                     cursor: pointer;
                 }
-
+                
                 @media (max-width: 600px) {
                     .serviceSearchCardContainer {
                         height: 100vw;
                         width: 100vw;
                         margin: 8px 0px;
                     }
-
                     #searchForProfessional {
                         margin-left: 3px;
                         line-height: 32px;
                     }
-
                     #cardsCategorySelectMenu {
                         width: 110%;
                         margin-left: -5%;
                     }
-
                     .topCardFeatured {
                         width: 100%;
                     }
                 }
-
+                
                 #serviceSearch h1 {
                     font-size: 22px;
                     font-weight: 400;
                     margin: 7px 0px 25px 30px;
                     text-align: left;
                 }
-
+                
                 #serviceSearch h2 {
                     font-size: 20px;
                     font-weight: 400;
                     margin: 7px 0px 25px 30px;
                     text-align: left;
                 }
-
+                
                 @media (min-width: 600px) {
                     .topCardFeatured {
                         width: 50%;
                     }
-
                     .serviceSearchCardContainer {
                         height: 280px;
                         width: 280px;
                         margin: 8px;
                     }
-
                     #searchForProfessional {
                         margin-left: 10px;
                         font-size: 20px;
                         line-height: 32px;
                     }
                 }
-
+                
                 .serviceSearchCardContainer {
                     border: 4px #363638 solid;
                     overflow: hidden;
@@ -3375,14 +3349,14 @@
                     border-radius: 19px;
                     cursor: pointer;
                 }
-
+                
                 .serviceSearchCardContainer>div {
                     height: 100%;
                     width: 100%;
                     background-color: rgba(0, 0, 0, 0.25);
                     backdrop-filter: blur(3px);
                 }
-
+                
                 .serviceSearchCard>div:nth-child(1) {
                     position: absolute;
                     top: 50%;
@@ -3391,20 +3365,20 @@
                     transform: translate(-50%, -50%);
                     line-height: 22px;
                 }
-
+                
                 .serviceSearchCard div div:nth-child(1) {
                     font-size: 22px;
                     margin-top: 20px;
                     font-weight: 600;
                 }
-
+                
                 .serviceSearchCard div div:nth-child(3) {
                     width: 100%;
                     font-size: 18px;
                     font-weight: 500;
                     line-height: 18px;
                 }
-
+                
                 .serviceSearchCard img {
                     height: 90px;
                     margin: 20px 0px;
@@ -3413,7 +3387,7 @@
                     background-size: 100%;
                     background-image: radial-gradient(#ffffffd9, transparent);
                 }
-
+                
                 #cardsCategorySelectMenu img {
                     width: 50%;
                 }
@@ -3421,64 +3395,51 @@
             <style class="darkreader darkreader--sync" media="screen"></style>
 
             <br><br>
-            <div id="searchServiceOpener" class="serviceOpeners"
-                style="visibility: visible; padding: 20px 0px; width: 100%; display: inline-block; background-image: radial-gradient(rgba(117, 102, 102, 0.16) -127px, transparent); --darkreader-inline-bgimage:radial-gradient(rgba(102, 110, 114, 0.16) -127px, rgba(24, 26, 27, 0));"
+            <div id="searchServiceOpener" class="serviceOpeners" style="visibility: visible; padding: 20px 0px; width: 100%; display: inline-block; background-image: radial-gradient(rgba(117, 102, 102, 0.16) -127px, transparent); --darkreader-inline-bgimage:radial-gradient(rgba(102, 110, 114, 0.16) -127px, rgba(24, 26, 27, 0));"
                 data-darkreader-inline-bgimage="">
                 <div style="float: right; border: 2px solid black; width: 30px; height: 30px; margin-left: 3px; --darkreader-inline-border-top:#181a1b; --darkreader-inline-border-right:#181a1b; --darkreader-inline-border-bottom:#181a1b; --darkreader-inline-border-left:#181a1b;"
-                    data-darkreader-inline-border-top="" data-darkreader-inline-border-right=""
-                    data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left="">
+                    data-darkreader-inline-border-top="" data-darkreader-inline-border-right="" data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left="">
 
-                    <img src="https://voalis.com/images/search.svg"
-                        style=" filter: invert(1); margin-top: 2.5px; width: 20px; ">
+                    <img src="https://voalis.com/images/search.svg" style=" filter: invert(1); margin-top: 2.5px; width: 20px; ">
 
                 </div>
-                <div id="searchForProfessional" onclick="window.location='https://voalis.com/s'">Pesquise por um
-                    profissional ou serviço aqui.</div>
+                <div id="searchForProfessional" onclick="window.location='https://voalis.com/s'">Pesquise por um profissional ou serviço aqui.</div>
             </div>
 
             <br><br>
             <br>
 
             <div id="topCardsContainer" style="text-align: center; max-width: 600px;">
-                <div style="font-weight:500;font-size:20px;margin:6px;">Membros Voalis mais populares <span
-                        id="topLocationText" style="">perto de você.</span></div>
+                <div style="font-weight:500;font-size:20px;margin:6px;">Membros Voalis mais populares <span id="topLocationText" style="">perto de você.</span></div>
 
                 <br>
                 <div id="topCards" style="display:inline-block;">
 
 
 
-                    <div onclick="openCard(&quot;dinamica&quot;)" class="topCardFeatured topCardFeaturedBoost"
-                        style="background: linear-gradient(to right bottom, rgb(0, 0, 0), rgba(255, 255, 255, 0)) 0% 0% / cover, url(&quot;https://voalis.com/cardassets/backgrounds/thumbnails/3_architect7.jpg&quot;); --darkreader-inline-bgcolor: initial;"
+                    <div onclick="openCard(&quot;dinamica&quot;)" class="topCardFeatured topCardFeaturedBoost" style="background: linear-gradient(to right bottom, rgb(0, 0, 0), rgba(255, 255, 255, 0)) 0% 0% / cover, url(&quot;https://voalis.com/cardassets/backgrounds/thumbnails/3_architect7.jpg&quot;); --darkreader-inline-bgcolor: initial;"
                         data-darkreader-inline-bgcolor="">
                         <div>DINAMICA ENGENHARIA </div>
                         <div>ENGENHARIA E MARCENARIA </div>
-                        <div style="position:absolute;bottom:7px;right:7px;"><img
-                                src="https://voalis.com/images/service-boost-icon.png" style="width:31px;"></div>
+                        <div style="position:absolute;bottom:7px;right:7px;"><img src="https://voalis.com/images/service-boost-icon.png" style="width:31px;"></div>
                     </div>
-                    <div onclick="openCard(&quot;mirianmanoel&quot;)" class="topCardFeatured topCardFeaturedBoost"
-                        style="background: linear-gradient(to right bottom, rgb(0, 0, 0), rgba(255, 255, 255, 0)) 0% 0% / cover, url(&quot;https://voalis.com/cardassets/backgrounds/thumbnails/3_science2.jpg&quot;); --darkreader-inline-bgcolor: initial;"
+                    <div onclick="openCard(&quot;mirianmanoel&quot;)" class="topCardFeatured topCardFeaturedBoost" style="background: linear-gradient(to right bottom, rgb(0, 0, 0), rgba(255, 255, 255, 0)) 0% 0% / cover, url(&quot;https://voalis.com/cardassets/backgrounds/thumbnails/3_science2.jpg&quot;); --darkreader-inline-bgcolor: initial;"
                         data-darkreader-inline-bgcolor="">
                         <div>Mirian Manoel da Silva</div>
                         <div>Psicóloga CRP- 06/51526-4</div>
-                        <div style="position:absolute;bottom:7px;right:7px;"><img
-                                src="https://voalis.com/images/service-boost-icon.png" style="width:31px;"></div>
+                        <div style="position:absolute;bottom:7px;right:7px;"><img src="https://voalis.com/images/service-boost-icon.png" style="width:31px;"></div>
                     </div>
-                    <div onclick="openCard(&quot;daianastore&quot;)" class="topCardFeatured topCardFeaturedBoost"
-                        style="background: linear-gradient(to right bottom, rgb(0, 0, 0), rgba(255, 255, 255, 0)) 0% 0% / cover, url(&quot;https://voalis.com/userassets/thumbnails/custombackgrounds/daianastore.jpg&quot;); --darkreader-inline-bgcolor: initial;"
+                    <div onclick="openCard(&quot;daianastore&quot;)" class="topCardFeatured topCardFeaturedBoost" style="background: linear-gradient(to right bottom, rgb(0, 0, 0), rgba(255, 255, 255, 0)) 0% 0% / cover, url(&quot;https://voalis.com/userassets/thumbnails/custombackgrounds/daianastore.jpg&quot;); --darkreader-inline-bgcolor: initial;"
                         data-darkreader-inline-bgcolor="">
                         <div>Daiana_Store </div>
                         <div>Loja Online</div>
-                        <div style="position:absolute;bottom:7px;right:7px;"><img
-                            src="https://voalis.com/images/service-boost-icon.png" style="width:31px;"></div>
+                        <div style="position:absolute;bottom:7px;right:7px;"><img src="https://voalis.com/images/service-boost-icon.png" style="width:31px;"></div>
                     </div>
-                    <div onclick="openCard(&quot;canilenchantress&quot;)" class="topCardFeatured topCardFeaturedBoost"
-                        style="background: linear-gradient(to right bottom, rgb(0, 0, 0), rgba(255, 255, 255, 0)) 0% 0% / cover, url(&quot;https://voalis.com/userassets/thumbnails/custombackgrounds/canilenchantress.jpg&quot;); --darkreader-inline-bgcolor: initial;"
+                    <div onclick="openCard(&quot;canilenchantress&quot;)" class="topCardFeatured topCardFeaturedBoost" style="background: linear-gradient(to right bottom, rgb(0, 0, 0), rgba(255, 255, 255, 0)) 0% 0% / cover, url(&quot;https://voalis.com/userassets/thumbnails/custombackgrounds/canilenchantress.jpg&quot;); --darkreader-inline-bgcolor: initial;"
                         data-darkreader-inline-bgcolor="">
                         <div>Canil Enchantress </div>
                         <div>Criação Ética e humanizada </div>
-                        <div style="position:absolute;bottom:7px;right:7px;"><img
-                            src="https://voalis.com/images/service-boost-icon.png" style="width:31px;"></div>
+                        <div style="position:absolute;bottom:7px;right:7px;"><img src="https://voalis.com/images/service-boost-icon.png" style="width:31px;"></div>
                     </div>
                 </div>
 
@@ -3536,7 +3497,9 @@
             function resetImagesFinishedLoading() {
                 imagesFinishedLoading = false;
 
-                Promise.all(Array.from(document.images).filter(img => !img.complete).map(img => new Promise(resolve => { img.onload = img.onerror = resolve; }))).then(() => {
+                Promise.all(Array.from(document.images).filter(img => !img.complete).map(img => new Promise(resolve => {
+                    img.onload = img.onerror = resolve;
+                }))).then(() => {
                     imagesFinishedLoading = true;
                 });
             }
@@ -3552,7 +3515,7 @@
 
             function tempDisableOpenCard() {
                 disableOpenCard = false;
-                setTimeout(function () {
+                setTimeout(function() {
                     disableOpenCard = true;
                 }, 10000);
             }
@@ -3601,7 +3564,9 @@
 
                 cardsShown.push(card.code);
 
-                if (amount > 0) setTimeout(function (amount, delay) { showCard(amount, delay, true) }, delay, amount - 1, delay);
+                if (amount > 0) setTimeout(function(amount, delay) {
+                    showCard(amount, delay, true)
+                }, delay, amount - 1, delay);
                 else addingMoreCards = false;
             }
 
@@ -3628,7 +3593,7 @@
             var outtaCards = false;
             var addingMoreCards = false;
 
-            $(window).scroll(function () {
+            $(window).scroll(function() {
                 if (!fillCardsOnScroll) return false;
 
                 if (($("#serviceSearch").css("display") != "none") && $(window).scrollTop() + window.innerHeight > $(document).height() - 250) {
@@ -3639,7 +3604,6 @@
                     }
                 }
             });
-
         </script>
 
 
@@ -3649,43 +3613,28 @@
 
             <br><br>
 
-            <div id="serviceSearchBar"
-                style="width: 100%; background-color: rgb(47, 47, 47); margin-bottom: 20px; display: inline-block; --darkreader-inline-bgcolor:#393e40;"
-                data-darkreader-inline-bgcolor="">
+            <div id="serviceSearchBar" style="width: 100%; background-color: rgb(47, 47, 47); margin-bottom: 20px; display: inline-block; --darkreader-inline-bgcolor:#393e40;" data-darkreader-inline-bgcolor="">
 
                 <div style="width: 90%; height: auto; position: relative; top:28px; margin-bottom: 42px;">
-                    <input id="searchBarInput" placeholder="Pesquise aqui..."
-                        style="width: calc(96% - 90px); background-color: white; font-size: 22px; padding-left: 8px; float: left; height: 40px; --darkreader-inline-bgcolor:#dcdad7;"
-                        data-darkreader-inline-bgcolor="">
-                    <div onclick="modifyURL(searchState, $('#searchBarInput').val())"
-                        style="float: right; margin-left: -13px; font-weight: 600; margin-top: 2px; height: 36px; padding: 0px 10px; background-color: white; line-height: 36px; --darkreader-inline-bgcolor:#dcdad7;"
+                    <input id="searchBarInput" placeholder="Pesquise aqui..." style="width: calc(96% - 90px); background-color: white; font-size: 22px; padding-left: 8px; float: left; height: 40px; --darkreader-inline-bgcolor:#dcdad7;" data-darkreader-inline-bgcolor="">
+                    <div onclick="modifyURL(searchState, $('#searchBarInput').val())" style="float: right; margin-left: -13px; font-weight: 600; margin-top: 2px; height: 36px; padding: 0px 10px; background-color: white; line-height: 36px; --darkreader-inline-bgcolor:#dcdad7;"
                         data-darkreader-inline-bgcolor="">Pesquisar</div>
 
-                    <div style="color: white; width: 100%; text-align: left; display: inline-block; margin-top: 5px; --darkreader-inline-color:#dcdad7;"
-                        data-darkreader-inline-color="">Pesquisando
-                        <span id="searchbarLocationText" style="text-decoration: underline; cursor: pointer;"
-                            onclick="askState();">no Rio de Janeiro</span>
+                    <div style="color: white; width: 100%; text-align: left; display: inline-block; margin-top: 5px; --darkreader-inline-color:#dcdad7;" data-darkreader-inline-color="">Pesquisando
+                        <span id="searchbarLocationText" style="text-decoration: underline; cursor: pointer;" onclick="askState();">no Rio de Janeiro</span>
                     </div>
 
-                    <div id="chooseCategoryDiv"
-                        style="color: white; width: 100%; text-align: left; margin-top: 10px; cursor: pointer; display: inline-block; --darkreader-inline-color:#dcdad7;"
-                        data-darkreader-inline-color="">
-                        <div onclick="showCategoryImages();" id="hasCategory" style="display:none;float:left;">Na
-                            categoria <span id="currentCategoryText"
-                                style="text-decoration:underline;cursor:pointer;"></span></div>
-                        <div onclick="showCategoryImages();" id="noCategory"
-                            style="float: left; transition: margin-bottom 0.6s ease 0s;">Ou, <u>pesquisar por
+                    <div id="chooseCategoryDiv" style="color: white; width: 100%; text-align: left; margin-top: 10px; cursor: pointer; display: inline-block; --darkreader-inline-color:#dcdad7;" data-darkreader-inline-color="">
+                        <div onclick="showCategoryImages();" id="hasCategory" style="display:none;float:left;">Na categoria <span id="currentCategoryText" style="text-decoration:underline;cursor:pointer;"></span></div>
+                        <div onclick="showCategoryImages();" id="noCategory" style="float: left; transition: margin-bottom 0.6s ease 0s;">Ou, <u>pesquisar por
                                 categoria</u></div>
 
-                        <div id="resetCategory"
-                            onclick="$(&quot;#hasCategory&quot;).hide();$(&quot;#noCategory&quot;).show();$(this).hide();modifyURL(searchState,&quot;&quot;,-1);"
-                            style="display:none;float: right; line-height: 21px; font-size: 36px; ">×</div>
+                        <div id="resetCategory" onclick="$(&quot;#hasCategory&quot;).hide();$(&quot;#noCategory&quot;).show();$(this).hide();modifyURL(searchState,&quot;&quot;,-1);" style="display:none;float: right; line-height: 21px; font-size: 36px; ">×</div>
 
 
                     </div>
 
-                    <div id="cardsCategorySelectMenu"
-                        style="display:none;height:0%;transition: 0.8s all;overflow:hidden;">
+                    <div id="cardsCategorySelectMenu" style="display:none;height:0%;transition: 0.8s all;overflow:hidden;">
                     </div>
 
                 </div>
@@ -3698,8 +3647,7 @@
             <div id="serviceSearchCards"></div>
 
             <div id="serviceSearchCardsNotFound" style="font-size:22px;display:none;" data-nosnippet="">
-                <br><br>
-                Não encontramos nenhuma perfil Voalis<br>relacionado a sua pesquisa.
+                <br><br> Não encontramos nenhuma perfil Voalis<br>relacionado a sua pesquisa.
             </div>
 
         </div>
@@ -3721,9 +3669,7 @@
 
     <div id="mainMenu" data-nosnippet="" style="display: none; justify-content: center; align-items: center;">
 
-        <svg id="mainMenuSVG_pt" version="1.1" style="width: 100%; max-width: 75vh; margin-top: -160px;"
-            xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#"
-            xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        <svg id="mainMenuSVG_pt" version="1.1" style="width: 100%; max-width: 75vh; margin-top: -160px;" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
             xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 352.81 961.18">
             <metadata>
                 <rdf:rdf>
@@ -4017,9 +3963,7 @@
             </g>
         </svg>
 
-        <svg id="mainMenuSVG_en" version="1.1" style="width:100%;max-width:75vh;display:none;margin-top:-160px;"
-            xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#"
-            xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        <svg id="mainMenuSVG_en" version="1.1" style="width:100%;max-width:75vh;display:none;margin-top:-160px;" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
             xmlns:xlink="http://www.w3.org/1999/xlink">
             <defs id="defs290"></defs>
             <sodipodi:namedview pagecolor="#ffffff" bordercolor="#666666" borderopacity="1" objecttolerance="10"
@@ -4258,10 +4202,8 @@
         </svg>
 
 
-        <svg id="mainMenuSVG_es" version="1.1" style="width:100%;max-width:75vh;display:none;margin-top:-160px;"
-            viewBox="0 0 352.81 961.18" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#"
-            xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <svg id="mainMenuSVG_es" version="1.1" style="width:100%;max-width:75vh;display:none;margin-top:-160px;" viewBox="0 0 352.81 961.18" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/"
+            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink">
             <defs id="defs290"></defs>
             <sodipodi:namedview pagecolor="#ffffff" bordercolor="#666666" borderopacity="1" objecttolerance="10"
                 gridtolerance="10" guidetolerance="10" inkscape:pageopacity="0" inkscape:pageshadow="2"
@@ -4555,10 +4497,8 @@
             </text>
         </svg>
 
-        <svg id="adLandingPage1" viewBox="0 0 152.7 613.03" version="1.1"
-            style="width:100%;max-width:420px;display:none;" xmlns="http://www.w3.org/2000/svg"
-            xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/"
-            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <svg id="adLandingPage1" viewBox="0 0 152.7 613.03" version="1.1" style="width:100%;max-width:420px;display:none;" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
             <defs>
                 <linearGradient id="linearGradient1359" x1="-2012.6" x2="-1654.1" y1="11.555" y2="708.82"
                     gradientTransform="translate(1731.4 -241.05)" gradientUnits="userSpaceOnUse">
@@ -4654,11 +4594,11 @@
         });
 
         if ("serviceWorker" in navigator) {
-            window.addEventListener("load", function () {
-                navigator.serviceWorker.register("https://voalis.com/serviceworker.js").then(function (registration) {
+            window.addEventListener("load", function() {
+                navigator.serviceWorker.register("https://voalis.com/serviceworker.js").then(function(registration) {
                     swRegistration = registration;
                     console.log("ServiceWorker registration successful with scope: ", registration.scope);
-                }, function (err) {
+                }, function(err) {
                     console.log("ServiceWorker registration failed: ", err);
                 });
             });
@@ -4667,25 +4607,18 @@
         console.log(navigator.userAgent);
     </script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.8/js/intlTelInput.min.js"
-        integrity="sha256-qbzshEdg+Il/Q1v5Xa7eDYCWNWNE4/RbY02VvOxk7/o=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.8/css/intlTelInput.css"
-        integrity="sha256-rTKxJIIHupH7lFo30458ner8uoSSRYciA0gttCkw1JE=" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.8/js/intlTelInput.min.js" integrity="sha256-qbzshEdg+Il/Q1v5Xa7eDYCWNWNE4/RbY02VvOxk7/o=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.8/css/intlTelInput.css" integrity="sha256-rTKxJIIHupH7lFo30458ner8uoSSRYciA0gttCkw1JE=" crossorigin="anonymous">
     <style class="darkreader darkreader--sync" media="screen"></style>
 
 
 
-    <div id="bottomBar"
-        style="background-color: rgb(24, 24, 24); width: 100%; padding: 15px 0px; display: inline-block; visibility: visible; --darkreader-inline-bgcolor:#292c2e;"
-        data-darkreader-inline-bgcolor="">
+    <div id="bottomBar" style="background-color: rgb(24, 24, 24); width: 100%; padding: 15px 0px; display: inline-block; visibility: visible; --darkreader-inline-bgcolor:#292c2e;" data-darkreader-inline-bgcolor="">
         <img style="width:100px;float:right;margin-right:10vw;" src="https://voalis.com/images/homepageimg/vls_r.png">
 
-        <div style="float: left; text-align: left; margin-left: 185px ;margin-top: 12px; color: white; margin-right: 10vw; --darkreader-inline-color:#dcdad7;"
-            data-darkreader-inline-color="">
-            <a style="color: white; text-decoration: none; --darkreader-inline-color:#dcdad7;"
-                href="https://voalis.com/c/voaliscards" data-darkreader-inline-color="">Contato</a><br>
-            <a style="color: white; text-decoration: none; --darkreader-inline-color:#dcdad7;"
-                href="https://voalis.com/privacy" data-darkreader-inline-color="">Política de Privacidade</a><br>
+        <div style="float: left; text-align: left; margin-left: 185px ;margin-top: 12px; color: white; margin-right: 10vw; --darkreader-inline-color:#dcdad7;" data-darkreader-inline-color="">
+            <a style="color: white; text-decoration: none; --darkreader-inline-color:#dcdad7;" href="https://voalis.com/c/voaliscards" data-darkreader-inline-color="">Contato</a><br>
+            <a style="color: white; text-decoration: none; --darkreader-inline-color:#dcdad7;" href="https://voalis.com/privacy" data-darkreader-inline-color="">Política de Privacidade</a><br>
             <b>© 2020 Voalis Ltd.</b>
         </div>
 
