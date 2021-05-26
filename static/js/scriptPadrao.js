@@ -203,7 +203,7 @@ var appMode = false;
 if (matchMedia('(display-mode: standalone)').matches) appMode = true;
 
 var auth = storage.getItem("auth");
-//var loggedIn = (auth != null);
+var loggedIn = (auth != null);
 if (loggedIn) auth = auth.split(",");
 
 var savedNoLogin = storage.getItem("savedNoLogin");
